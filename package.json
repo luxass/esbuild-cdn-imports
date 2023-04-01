@@ -1,0 +1,67 @@
+{
+  "name": "esbuild-plugin-cdn-imports",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "A esbuild plugin that resolves imports directly to a CDN.",
+  "author": {
+    "name": "Lucas Nørgård",
+    "email": "lucasnrgaard@gmail.com",
+    "url": "https://luxass.dev"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/luxass/esbuild-cdn-imports",
+  "repository": "https://github.com/luxass/esbuild-cdn-imports",
+  "bugs": {
+    "url": "https://github.com/luxass/esbuild-cdn-imports/issues"
+  },
+  "keywords": [
+    "esbuild",
+    "plugin",
+    "skypack",
+    "unpkg",
+    "jsdelivr",
+    "esm",
+    "import"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "packageManager": "pnpm@7.29.0",
+  "scripts": {
+    "build": "tsup",
+    "dev": "vitest dev",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "esbuild": "^0.17.14"
+  },
+  "dependencies": {
+    "cdn-resolve": "file:../cdn-resolve"
+  },
+  "devDependencies": {
+    "@luxass/eslint-config": "^3.1.0",
+    "@luxass/prettier-config": "^1.2.0",
+    "@types/node": "^18.15.10",
+    "esbuild": "^0.17.14",
+    "eslint": "^8.36.0",
+    "prettier": "^2.8.7",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.7"
+  }
+}

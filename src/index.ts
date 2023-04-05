@@ -158,9 +158,7 @@ export function CDNImports(options?: Options): Plugin {
                 require:
                   args.kind === "require-call" ||
                   args.kind === "require-resolve"
-              }) || legacy(pkg, {});
-
-            console.log("RESOLVED", parsed.full, resolvedExport);
+              }) || legacy(pkg);
 
             if (typeof resolvedExport === "string") {
               subpath = resolvedExport.replace(/^\.?\/?/, "/");

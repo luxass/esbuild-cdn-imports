@@ -1,7 +1,8 @@
 import { build } from "esbuild";
 import { expect, test } from "vitest";
 
-import { CDNImportPlugin } from "../src";
+import { CDNImports } from "../src";
+
 
 test("resolve @vue/reactivity from esm.sh", async () => {
   const result = await build({
@@ -10,7 +11,7 @@ test("resolve @vue/reactivity from esm.sh", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "esm"
       })
     ],
@@ -35,7 +36,7 @@ test("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "esm",
         versions: {
           "@vue/reactivity": "3.1.5"
@@ -53,7 +54,9 @@ test("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
     /^\/\/ cdn-imports:https:\/\/esm.sh\//gm
   );
 
-  expect(result.outputFiles[0].text).toMatch(/^\/\/ cdn-imports:https:\/\/esm.sh\/.*\/@vue\/reactivity@3\.1\.5/gm);
+  expect(result.outputFiles[0].text).toMatch(
+    /^\/\/ cdn-imports:https:\/\/esm.sh\/.*\/@vue\/reactivity@3\.1\.5/gm
+  );
 
   expect(matchedImports).toHaveLength(2);
 });
@@ -65,7 +68,7 @@ test("resolve react from esm.sh with exclude", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "esm",
         exclude: ["react"]
       })
@@ -77,7 +80,8 @@ test("resolve react from esm.sh with exclude", async () => {
     warnings: result.warnings
   }).toEqual({ errors: [], warnings: [] });
 
-  expect(result.outputFiles[0].text).toBe(`// test/fixtures/node_modules/react/index.js
+  expect(result.outputFiles[0].text)
+    .toBe(`// test/fixtures/node_modules/react/index.js
 function useState(value) {
   return [1, () => {
   }];

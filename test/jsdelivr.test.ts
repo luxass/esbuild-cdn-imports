@@ -1,7 +1,7 @@
 import { build } from "esbuild";
 import { expect, test } from "vitest";
 
-import { CDNImportPlugin } from "../src";
+import { CDNImports } from "../src";
 
 test("resolve @vue/reactivity from jsdelivr", async () => {
   const result = await build({
@@ -10,7 +10,7 @@ test("resolve @vue/reactivity from jsdelivr", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "jsdelivr"
       })
     ],
@@ -35,7 +35,7 @@ test("resolve @vue/reactivity@3.1.5 from jsdelivr", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "jsdelivr",
         versions: {
           "@vue/reactivity": "3.1.5"
@@ -66,7 +66,7 @@ test("resolve react from jsdelivr with exclude", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "jsdelivr",
         exclude: ["react"]
       })

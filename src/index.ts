@@ -51,7 +51,7 @@ function isExternal(module: string, external: string[]) {
   });
 }
 
-export function CDNImportPlugin(options?: Options): Plugin {
+export function CDNImports(options?: Options): Plugin {
   const resolvedOptions = resolveOptions(options);
   return {
     name: "esbuild-cdn-imports",

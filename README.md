@@ -16,26 +16,26 @@ Add this to your build file
 
 ```js
 import { build } from "esbuild";
-import cdnImports from "esbuild-plugin-cdn-imports";
+import { CDNImports } from "esbuild-plugin-cdn-imports";
 
 const yourConfig = {};
 
 await build({
   ...yourConfig,
-  plugins: [cdnImports({
-    // Available cdns: "esm", "unpkg", "jsdelivr", "skypack"
-    cdn: "esm",
-    versions: {
-      // The version of the package to use
-      // If not specified, the latest version will be used
-      "react": "17.0.2",
-      "react-dom": "17.0.2"
-    },
-    // This will not be resolved to a CDN URL
-    exclude: [
-      "@prisma/client"
-    ]
-  })]
+  plugins: [
+    CDNImports({
+      // Available cdns: "esm", "unpkg", "jsdelivr", "skypack"
+      cdn: "esm",
+      versions: {
+        // The version of the package to use
+        // If not specified, the latest version will be used
+        "react": "17.0.2",
+        "react-dom": "17.0.2"
+      },
+      // This will not be resolved to a CDN URL
+      exclude: ["@prisma/client"]
+    })
+  ]
 });
 ```
 

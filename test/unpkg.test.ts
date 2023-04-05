@@ -1,7 +1,8 @@
 import { build } from "esbuild";
 import { expect, test } from "vitest";
 
-import { CDNImportPlugin } from "../src";
+import { CDNImports } from "../src";
+
 
 test("resolve @vue/reactivity from unpkg.com", async () => {
   const result = await build({
@@ -10,7 +11,7 @@ test("resolve @vue/reactivity from unpkg.com", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "unpkg"
       })
     ],
@@ -35,7 +36,7 @@ test("resolve @vue/reactivity@3.1.5 from unpkg.com", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "unpkg",
         versions: {
           "@vue/reactivity": "3.1.5"
@@ -67,7 +68,7 @@ test("resolve react from unpkg.com with exclude", async () => {
     bundle: true,
     write: false,
     plugins: [
-      CDNImportPlugin({
+      CDNImports({
         cdn: "unpkg",
         exclude: ["react"]
       })
@@ -79,7 +80,8 @@ test("resolve react from unpkg.com with exclude", async () => {
     warnings: result.warnings
   }).toEqual({ errors: [], warnings: [] });
 
-  expect(result.outputFiles[0].text).toBe(`// test/fixtures/node_modules/react/index.js
+  expect(result.outputFiles[0].text)
+    .toBe(`// test/fixtures/node_modules/react/index.js
 function useState(value) {
   return [1, () => {
   }];

@@ -2,7 +2,7 @@ import type { SupportedCDNS } from "cdn-resolve";
 import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import type { Loader, Plugin } from "esbuild";
 import { ofetch } from "ofetch";
-import { join } from "path-browserify";
+import { extname, join } from "path-browserify";
 import { legacy, resolve } from "resolve.exports";
 
 export interface Options {
@@ -21,15 +21,25 @@ export interface Options {
    * Versions to use for certain packages.
    */
   versions?: Record<string, string>;
+
+  /**
+   * The default loader to use for files, that are doesn't have a file extension
+   * @default js
+   */
+  defaultLoader?: Loader;
 }
 
 function resolveOptions(options?: Options): Required<Options> {
   return {
     cdn: options?.cdn ?? "esm",
-    exclude: [],
-    versions: {}
+    exclude: options?.exclude || [],
+    versions: options?.versions || {},
+    defaultLoader: options?.defaultLoader || "js"
   };
 }
+
+// https://esbuild.github.io/api/#resolve-extensions
+const RESOLVE_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js", ".json"];
 
 function isExternal(module: string, external: string[]) {
   if (!Array.isArray(external)) {
@@ -41,7 +51,7 @@ function isExternal(module: string, external: string[]) {
   });
 }
 
-function CDNImportPlugin(options?: Options): Plugin {
+export function CDNImportPlugin(options?: Options): Plugin {
   const resolvedOptions = resolveOptions(options);
   return {
     name: "esbuild-cdn-imports",
@@ -79,7 +89,20 @@ function CDNImportPlugin(options?: Options): Plugin {
           }
 
           const url = new URL(args.pluginData.url);
-          url.pathname = join("../", args.path);
+
+          if (resolvedOptions.cdn === "esm") {
+            url.pathname = join("../", args.path);
+          } else if (
+            resolvedOptions.cdn === "skypack" ||
+            resolvedOptions.cdn === "jsdelivr"
+          ) {
+            url.pathname = join(url.pathname, args.path);
+          } else if (resolvedOptions.cdn === "unpkg") {
+            url.pathname = join(url.pathname, "../", args.path);
+          } else {
+            throw new Error(`Unsupported CDN: ${resolvedOptions.cdn}`);
+          }
+
           return {
             path: url.toString(),
             namespace: "cdn-imports"
@@ -92,9 +115,18 @@ function CDNImportPlugin(options?: Options): Plugin {
           filter: /.*/
         },
         async (args) => {
-          console.log("ON RESOLVE WITHOUT NAMESPACE ARGS", args);
+          if (args.kind === "entry-point") {
+            return null;
+          }
+
           if (args.path[0] === ".") {
             throw new Error(`Unexpected relative import: ${args.path}`);
+          }
+
+          const parsed = parsePackage(args.path);
+
+          if (resolvedOptions.exclude.includes(parsed.name)) {
+            return null;
           }
 
           if (isExternal(args.path, ctx.initialOptions.external || [])) {
@@ -104,19 +136,13 @@ function CDNImportPlugin(options?: Options): Plugin {
             };
           }
 
-          const parsed = parsePackage(args.path);
+          if (resolvedOptions.versions[parsed.name]) {
+            parsed.version = resolvedOptions.versions[parsed.name];
+          }
+
           let subpath = parsed.path;
-          console.log("oa", parsed);
 
           if (!subpath) {
-            console.log(
-              "fetching package.json",
-              `${parsed.name}@${parsed.version}/package.json`,
-              normalizeCdnUrl(
-                resolvedOptions.cdn,
-                `${parsed.name}@${parsed.version}/package.json`
-              )
-            );
             const pkg = await ofetch(
               normalizeCdnUrl(
                 resolvedOptions.cdn,
@@ -127,21 +153,22 @@ function CDNImportPlugin(options?: Options): Plugin {
               }
             );
 
-            console.log("pkg", pkg);
-
-            const p =
+            const resolvedExport =
               resolve(pkg, ".", {
                 require:
                   args.kind === "require-call" ||
                   args.kind === "require-resolve"
               }) || legacy(pkg);
 
-            if (Array.isArray(p) && p.length > 0) {
-              subpath = p[0].replace(/^\.?\/?/, "/");
+            if (typeof resolvedExport === "string") {
+              subpath = resolvedExport.replace(/^\.?\/?/, "/");
+            } else if (
+              Array.isArray(resolvedExport) &&
+              resolvedExport.length > 0
+            ) {
+              subpath = resolvedExport[0].replace(/^\.?\/?/, "/");
             }
           }
-
-          console.log("subpath", subpath);
 
           if (subpath && subpath[0] !== "/") {
             subpath = `/${subpath}`;
@@ -163,15 +190,23 @@ function CDNImportPlugin(options?: Options): Plugin {
           namespace: "cdn-imports"
         },
         async (args) => {
-          const res = await ofetch(args.path);
+          const res = await ofetch.native(args.path);
+
           if (!res.ok) {
             throw new Error(`failed to load ${res.url}: ${res.status}`);
           }
-          console.log(res.url);
-          // const loader = inferLoader(res.url);
+          let loader: Loader = resolvedOptions.defaultLoader;
+          const ext = extname(res.url);
+
+          if (RESOLVE_EXTENSIONS.includes(ext)) {
+            loader = ext.slice(1) as Loader;
+          } else if (ext === ".mjs" || ext === ".cjs") {
+            loader = "js";
+          }
+
           return {
             contents: new Uint8Array(await res.arrayBuffer()),
-            loader: "js" as Loader,
+            loader,
             pluginData: {
               url: res.url
             }
@@ -182,4 +217,3 @@ function CDNImportPlugin(options?: Options): Plugin {
   };
 }
 
-export default CDNImportPlugin;

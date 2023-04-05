@@ -5,7 +5,7 @@ specifiers:
   '@luxass/prettier-config': ^1.2.0
   '@types/node': ^18.15.10
   '@types/path-browserify': ^1.0.0
-  cdn-resolve: ^0.1.3
+  cdn-resolve: ^0.1.4
   esbuild: ^0.17.14
   eslint: ^8.36.0
   ofetch: ^1.0.1
@@ -17,7 +17,7 @@ specifiers:
   vitest: ^0.29.7
 
 dependencies:
-  cdn-resolve: 0.1.3
+  cdn-resolve: 0.1.4
   ofetch: 1.0.1
   path-browserify: 1.0.1
   resolve.exports: 2.0.2
@@ -1088,8 +1088,8 @@ packages:
     resolution: {integrity: sha512-ewDad7+D2vlyy+E4UJuVfiBsU69IL+8oVmTuZnH5Q6CIUbxNfI50uVpRHbUPDD6SUaN2o0Lh4DhTrvLG/Tn1yg==}
     dev: true
 
-  /cdn-resolve/0.1.3:
-    resolution: {integrity: sha512-C+cFJYKwZXGwL9d04iq5H1gnCB5c1NIgIm5DZqprInoWor9V0qxaYnlXAK3CaV8w6I+U+1yi9v+fR5WQI/3FWw==}
+  /cdn-resolve/0.1.4:
+    resolution: {integrity: sha512-hGOoZpZmETWsrN+s3f5sMYGK+R8Xr05KY4xaWpIIDynwL7NLlba49FA4ug5Bej04vaI3+WSVkEC7zeaEodvv6Q==}
     engines: {node: '>=16'}
     dependencies:
       ofetch: 1.0.1

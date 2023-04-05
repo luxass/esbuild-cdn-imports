@@ -22,7 +22,20 @@ const yourConfig = {};
 
 await build({
   ...yourConfig,
-  plugins: [cdnImports({})]
+  plugins: [cdnImports({
+    // Available cdns: "esm", "unpkg", "jsdelivr", "skypack"
+    cdn: "esm",
+    versions: {
+      // The version of the package to use
+      // If not specified, the latest version will be used
+      "react": "17.0.2",
+      "react-dom": "17.0.2"
+    },
+    // This will not be resolved to a CDN URL
+    exclude: [
+      "@prisma/client"
+    ]
+  })]
 });
 ```
 

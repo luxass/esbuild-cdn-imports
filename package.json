@@ -45,7 +45,8 @@
     "build": "tsup",
     "dev": "vitest dev",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "esbuild": "^0.17.14"

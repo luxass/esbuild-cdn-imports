@@ -1,7 +1,7 @@
 {
   "name": "esbuild-plugin-cdn-imports",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A esbuild plugin that resolves imports directly to a CDN.",
   "author": {
     "name": "Lucas Nørgård",

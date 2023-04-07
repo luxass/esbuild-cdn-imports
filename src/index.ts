@@ -2,8 +2,9 @@ import type { SupportedCDNS } from "cdn-resolve";
 import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import type { Loader, Plugin } from "esbuild";
 import { ofetch } from "ofetch";
-import { extname, join } from "path-browserify";
 import { legacy, resolve } from "resolve.exports";
+
+import { extname, join } from "./path";
 
 export interface Options {
   /**

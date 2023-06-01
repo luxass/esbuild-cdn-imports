@@ -6,29 +6,29 @@ import { legacy, resolve } from "resolve.exports";
 
 import { extname, join } from "./path";
 
-export interface Options {
+export type Options = {
   /**
    * The CDN to use for resolving imports.
    * @default "esm"
    */
-  cdn?: SupportedCDNS;
+  cdn?: SupportedCDNS
 
   /**
    * Exclude certain packages from being resolved by the CDN.
    */
-  exclude?: string[];
+  exclude?: string[]
 
   /**
    * Versions to use for certain packages.
    */
-  versions?: Record<string, string>;
+  versions?: Record<string, string>
 
   /**
    * The default loader to use for files, that are doesn't have a file extension
    * @default js
    */
-  defaultLoader?: Loader;
-}
+  defaultLoader?: Loader
+};
 
 function resolveOptions(options?: Options): Required<Options> {
   return {

@@ -54,16 +54,16 @@
   },
   "dependencies": {
     "cdn-resolve": "^0.1.5",
-    "ofetch": "^1.0.1",
+    "ofetch": "^1.1.1",
     "resolve.exports": "^2.0.2"
   },
   "devDependencies": {
-    "@luxass/eslint-config": "^3.2.0",
-    "@types/node": "^18.16.16",
-    "esbuild": "^0.18.0",
-    "eslint": "^8.41.0",
-    "tsup": "^7.0.0",
-    "typescript": "^5.0.4",
-    "vitest": "^0.32.0"
+    "@luxass/eslint-config": "^3.2.2",
+    "@types/node": "^18.16.19",
+    "esbuild": "^0.18.11",
+    "eslint": "^8.44.0",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6",
+    "vitest": "^0.32.4"
   }
 }

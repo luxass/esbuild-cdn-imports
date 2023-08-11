@@ -2,7 +2,7 @@
   "name": "esbuild-plugin-cdn-imports",
   "type": "module",
   "version": "0.1.2",
-  "packageManager": "pnpm@8.6.11",
+  "packageManager": "pnpm@8.6.12",
   "description": "A esbuild plugin that resolves imports directly to a CDN.",
   "author": {
     "name": "Lucas Nørgård",
@@ -60,10 +60,10 @@
   "devDependencies": {
     "@luxass/eslint-config": "^3.2.2",
     "@types/node": "^18.16.19",
-    "esbuild": "^0.18.11",
+    "esbuild": "^0.19.0",
     "eslint": "^8.44.0",
     "tsup": "^7.1.0",
     "typescript": "^5.1.6",
-    "vitest": "^0.33.0"
+    "vitest": "^0.34.0"
   }
 }

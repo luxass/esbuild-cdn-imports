@@ -2,7 +2,7 @@
   "name": "esbuild-plugin-cdn-imports",
   "type": "module",
   "version": "0.1.2",
-  "packageManager": "pnpm@8.7.1",
+  "packageManager": "pnpm@8.7.4",
   "description": "A esbuild plugin that resolves imports directly to a CDN.",
   "author": {
     "name": "Lucas Nørgård",

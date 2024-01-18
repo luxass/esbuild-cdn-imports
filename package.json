@@ -53,7 +53,7 @@
     "esbuild": "^0.17.14"
   },
   "dependencies": {
-    "cdn-resolve": "^0.1.5",
+    "cdn-resolve": "^1.0.0",
     "ofetch": "^1.1.1",
     "resolve.exports": "^2.0.2"
   },

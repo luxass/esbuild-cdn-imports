@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   cdn-resolve:
-    specifier: ^0.1.5
-    version: 0.1.5
+    specifier: ^1.0.0
+    version: 1.0.1
   ofetch:
     specifier: ^1.1.1
     version: 1.1.1
@@ -1256,11 +1256,11 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /cdn-resolve@0.1.5:
-    resolution: {integrity: sha512-c+L14pqxNSytO7+A84wDSYt15XrsgBVkrEb26lQY69tpo01rke2nx9H5NcZl+neyRM1vIbDkjzESK7gCr0WkIA==}
-    engines: {node: '>=16'}
+  /cdn-resolve@1.0.1:
+    resolution: {integrity: sha512-VnEEI1RV79YyB0SFAZa7gWXBycNYOZkzmy53ZbSXNcjRms8ocQtIffVn2ZiCyd59PMPUzKUwH/peh+MPJQuFrg==}
+    engines: {node: '>=18'}
     dependencies:
-      ofetch: 1.1.1
+      ofetch: 1.3.3
     dev: false
 
   /chai@4.3.7:
@@ -1425,6 +1425,10 @@ packages:
 
   /destr@2.0.0:
     resolution: {integrity: sha512-FJ9RDpf3GicEBvzI3jxc2XhHzbqD8p4ANw/1kPsFBfTvP1b7Gn/Lg1vO7R9J4IVgoMbyUmFrFGZafJ1hPZpvlg==}
+    dev: false
+
+  /destr@2.0.2:
+    resolution: {integrity: sha512-65AlobnZMiCET00KaFFjUefxDX0khFA/E4myqZ7a6Sq1yZtR8+FVIvilVX66vF2uobSumxooYZChiRPCKNqhmg==}
     dev: false
 
   /diff-sequences@29.4.3:
@@ -2728,6 +2732,10 @@ packages:
     resolution: {integrity: sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==}
     dev: false
 
+  /node-fetch-native@1.6.1:
+    resolution: {integrity: sha512-bW9T/uJDPAJB2YNYEpWzE54U5O3MQidXsOyTfnbKYtTtFexRvGzb1waphBN4ZwP6EcIvYYEOwW0b72BpAqydTw==}
+    dev: false
+
   /normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
@@ -2794,6 +2802,14 @@ packages:
       destr: 2.0.0
       node-fetch-native: 1.2.0
       ufo: 1.1.2
+    dev: false
+
+  /ofetch@1.3.3:
+    resolution: {integrity: sha512-s1ZCMmQWXy4b5K/TW9i/DtiN8Ku+xCiHcjQ6/J/nDdssirrQNOoB165Zu8EqLMA2lln1JUth9a0aW9Ap2ctrUg==}
+    dependencies:
+      destr: 2.0.2
+      node-fetch-native: 1.6.1
+      ufo: 1.3.2
     dev: false
 
   /once@1.4.0:
@@ -3468,6 +3484,10 @@ packages:
 
   /ufo@1.1.2:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
+
+  /ufo@1.3.2:
+    resolution: {integrity: sha512-o+ORpgGwaYQXgqGDwd+hkS4PuZ3QnmqMMxRuajK/a38L6fTpcE5GPIfrf+L/KemFzfUpeUQc1rRS1iDBozvnFA==}
+    dev: false
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

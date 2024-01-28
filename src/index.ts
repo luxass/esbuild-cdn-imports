@@ -1,7 +1,6 @@
 import type { SupportedCDNS } from "cdn-resolve";
 import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import type { Loader, OnResolveArgs, Plugin, PluginBuild } from "esbuild";
-import { ofetch } from "ofetch";
 import { legacy, resolve } from "resolve.exports";
 import { extname, join } from "./path";
 import { builtinModules } from "./builtin-modules";
@@ -82,7 +81,12 @@ export function CDNImports(options?: Options): Plugin {
       // intercept all import paths inside downloaded files and resolve
       // them against the original URL of the downloaded file
       build.onResolve({ filter: /.*/, namespace: "cdn-imports" }, (args) => {
-        if (isExternal(args.path, externals)) return { external: true, path: args.path };
+        if (isExternal(args.path, externals)) {
+          return {
+            external: true,
+            path: args.path,
+          };
+        }
 
         if (!args.path.startsWith(".")) {
           return {
@@ -90,8 +94,20 @@ export function CDNImports(options?: Options): Plugin {
             namespace: "cdn-imports",
           };
         }
+
         const url = new URL(args.pluginData.url);
-        url.pathname = join(url.pathname, "../", args.path);
+
+        const isFile = extname(url.pathname) !== "";
+        const isLocalPath = args.path.startsWith("./");
+
+        if (resolvedOptions.cdn === "jsdelivr" && isLocalPath) {
+          if (isFile) {
+            url.pathname = url.pathname.replace(/\/[^/]+$/, "");
+          }
+          url.pathname = join(url.pathname, args.path.slice(1));
+        } else {
+          url.pathname = join(url.pathname, "../", args.path);
+        }
 
         return {
           path: url.toString(),
@@ -132,15 +148,10 @@ export function CDNImports(options?: Options): Plugin {
         let subpath = parsed.path;
 
         if (!subpath) {
-          const pkg = await ofetch(
-            normalizeCdnUrl(
-              resolvedOptions.cdn,
-                `${parsed.name}@${parsed.version}/package.json`,
-            ),
-            {
-              parseResponse: JSON.parse,
-            },
-          );
+          const pkg = await fetch(normalizeCdnUrl(
+            resolvedOptions.cdn,
+              `${parsed.name}@${parsed.version}/package.json`,
+          )).then((res) => res.json());
 
           const resolvedExport
               = resolve(pkg, ".", {
@@ -175,7 +186,7 @@ export function CDNImports(options?: Options): Plugin {
           namespace: "cdn-imports",
         },
         async (args) => {
-          const res = await ofetch.native(args.path);
+          const res = await fetch(args.path);
 
           if (!res.ok) {
             throw new Error(`failed to load ${res.url}: ${res.status}`);

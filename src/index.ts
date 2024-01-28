@@ -11,23 +11,23 @@ export interface Options {
    * The CDN to use for resolving imports.
    * @default "esm"
    */
-  cdn?: SupportedCDNS
+  cdn?: SupportedCDNS;
 
   /**
    * Exclude certain packages from being resolved by the CDN.
    */
-  exclude?: string[]
+  exclude?: string[];
 
   /**
    * Versions to use for certain packages.
    */
-  versions?: Record<string, string>
+  versions?: Record<string, string>;
 
   /**
    * The default loader to use for files, that doesn't have a file extension
    * @default js
    */
-  defaultLoader?: Loader
+  defaultLoader?: Loader;
 
   /**
    * A callback that is called when a relative import is encountered.
@@ -35,7 +35,7 @@ export interface Options {
    * @param {PluginBuild} build The `PluginBuild` instance.
    * @returns {ReturnType<Parameters<PluginBuild["onResolve"]>[1]>} The result of the `onResolve` callback.
    */
-  relativeImportsHandler?: (args: OnResolveArgs, build: PluginBuild) => ReturnType<Parameters<PluginBuild["onResolve"]>[1]>
+  relativeImportsHandler?: (args: OnResolveArgs, build: PluginBuild) => ReturnType<Parameters<PluginBuild["onResolve"]>[1]>;
 }
 
 function resolveOptions(options?: Options) {

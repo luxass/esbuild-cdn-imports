@@ -1,10 +1,9 @@
 import { build } from "esbuild";
-import { expect, test } from "vitest";
+import { expect, it } from "vitest";
 
 import { CDNImports } from "../src";
 
-
-test("resolve @vue/reactivity from esm.sh", async () => {
+it("resolve @vue/reactivity from esm.sh", async () => {
   const result = await build({
     entryPoints: ["./test/fixtures/vue-reactivity.ts"],
     format: "esm",
@@ -12,24 +11,24 @@ test("resolve @vue/reactivity from esm.sh", async () => {
     write: false,
     plugins: [
       CDNImports({
-        cdn: "esm"
-      })
+        cdn: "esm",
+      }),
     ],
-    outfile: "./test/fixtures/out/file.js"
+    outfile: "./test/fixtures/out/file.js",
   });
   expect({
     errors: result.errors,
-    warnings: result.warnings
+    warnings: result.warnings,
   }).toEqual({ errors: [], warnings: [] });
 
   const matchedImports = result.outputFiles[0].text.match(
-    /^\/\/ cdn-imports:https:\/\/esm.sh\//gm
+    /^\/\/ cdn-imports:https:\/\/esm.sh\//gm,
   );
 
   expect(matchedImports).toHaveLength(2);
 });
 
-test("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
+it("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
   const result = await build({
     entryPoints: ["./test/fixtures/vue-reactivity.ts"],
     format: "esm",
@@ -39,29 +38,29 @@ test("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
       CDNImports({
         cdn: "esm",
         versions: {
-          "@vue/reactivity": "3.1.5"
-        }
-      })
+          "@vue/reactivity": "3.1.5",
+        },
+      }),
     ],
-    outfile: "./test/fixtures/out/file.js"
+    outfile: "./test/fixtures/out/file.js",
   });
   expect({
     errors: result.errors,
-    warnings: result.warnings
+    warnings: result.warnings,
   }).toEqual({ errors: [], warnings: [] });
 
   const matchedImports = result.outputFiles[0].text.match(
-    /^\/\/ cdn-imports:https:\/\/esm.sh\//gm
+    /^\/\/ cdn-imports:https:\/\/esm.sh\//gm,
   );
 
   expect(result.outputFiles[0].text).toMatch(
-    /^\/\/ cdn-imports:https:\/\/esm.sh\/.*\/@vue\/reactivity@3\.1\.5/gm
+    /^\/\/ cdn-imports:https:\/\/esm.sh\/.*\/@vue\/reactivity@3\.1\.5/gm,
   );
 
   expect(matchedImports).toHaveLength(2);
 });
 
-test("resolve react from esm.sh with exclude", async () => {
+it("resolve react from esm.sh with exclude", async () => {
   const result = await build({
     entryPoints: ["./test/fixtures/react.tsx"],
     format: "esm",
@@ -70,14 +69,14 @@ test("resolve react from esm.sh with exclude", async () => {
     plugins: [
       CDNImports({
         cdn: "esm",
-        exclude: ["react"]
-      })
+        exclude: ["react"],
+      }),
     ],
-    outfile: "./test/fixtures/out/file.js"
+    outfile: "./test/fixtures/out/file.js",
   });
   expect({
     errors: result.errors,
-    warnings: result.warnings
+    warnings: result.warnings,
   }).toEqual({ errors: [], warnings: [] });
 
   expect(result.outputFiles[0].text)

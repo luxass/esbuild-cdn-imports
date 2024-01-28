@@ -1,12 +1,12 @@
 import type { SupportedCDNS } from "cdn-resolve";
 import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
-import type { Loader, Plugin } from "esbuild";
+import type { Loader, OnResolveArgs, Plugin, PluginBuild } from "esbuild";
 import { ofetch } from "ofetch";
 import { legacy, resolve } from "resolve.exports";
-
 import { extname, join } from "./path";
+import { builtinModules } from "./builtin-modules";
 
-export type Options = {
+export interface Options {
   /**
    * The CDN to use for resolving imports.
    * @default "esm"
@@ -24,18 +24,27 @@ export type Options = {
   versions?: Record<string, string>
 
   /**
-   * The default loader to use for files, that are doesn't have a file extension
+   * The default loader to use for files, that doesn't have a file extension
    * @default js
    */
   defaultLoader?: Loader
-};
 
-function resolveOptions(options?: Options): Required<Options> {
+  /**
+   * A callback that is called when a relative import is encountered.
+   * @param {OnResolveArgs} args The arguments passed to the `onResolve` callback.
+   * @param {PluginBuild} build The `PluginBuild` instance.
+   * @returns {ReturnType<Parameters<PluginBuild["onResolve"]>[1]>} The result of the `onResolve` callback.
+   */
+  relativeImportsHandler?: (args: OnResolveArgs, build: PluginBuild) => ReturnType<Parameters<PluginBuild["onResolve"]>[1]>
+}
+
+function resolveOptions(options?: Options) {
   return {
     cdn: options?.cdn ?? "esm",
     exclude: options?.exclude || [],
     versions: options?.versions || {},
-    defaultLoader: options?.defaultLoader || "js"
+    defaultLoader: options?.defaultLoader || "js",
+    relativeImportsHandler: options?.relativeImportsHandler,
   };
 }
 
@@ -47,148 +56,123 @@ function isExternal(module: string, external: string[]) {
     throw new TypeError("external must be an array");
   }
 
-  return external.some((pattern) => {
-    return pattern === module || pattern.startsWith(`${pattern}/`);
-  });
+  return external.find((it) => it === module || it.startsWith(`${it}/`));
 }
+
+const URL_RE = /^https?:\/\//;
 
 export function CDNImports(options?: Options): Plugin {
   const resolvedOptions = resolveOptions(options);
+
   return {
     name: "esbuild-cdn-imports",
-    setup(ctx) {
-      ctx.onResolve(
-        {
-          filter: /^https?:\/\//
-        },
-        async (args) => {
+    setup(build) {
+      const externals = [
+        ...(build.initialOptions.external || []),
+        ...builtinModules,
+      ];
+
+      // intercept import paths starting with "http:" and "https:" so
+      // esbuild doesn't attempt to map them to a file system location.
+      build.onResolve({ filter: URL_RE }, (args) => ({
+        path: args.path,
+        namespace: "cdn-imports",
+      }));
+
+      // intercept all import paths inside downloaded files and resolve
+      // them against the original URL of the downloaded file
+      build.onResolve({ filter: /.*/, namespace: "cdn-imports" }, (args) => {
+        if (isExternal(args.path, externals)) return { external: true, path: args.path };
+
+        if (!args.path.startsWith(".")) {
           return {
+            path: normalizeCdnUrl(resolvedOptions.cdn, args.path),
+            namespace: "cdn-imports",
+          };
+        }
+        const url = new URL(args.pluginData.url);
+        url.pathname = join(url.pathname, "../", args.path);
+
+        return {
+          path: url.toString(),
+          namespace: "cdn-imports",
+        };
+      });
+
+      build.onResolve({ filter: /.*/ }, async (args) => {
+        if (args.kind === "entry-point") {
+          return null;
+        }
+
+        if (args.path.startsWith(".")) {
+          if (resolvedOptions.relativeImportsHandler) {
+            return resolvedOptions.relativeImportsHandler(args, build);
+          }
+
+          return null;
+        }
+
+        const parsed = parsePackage(args.path);
+
+        if (resolvedOptions.exclude.includes(parsed.name)) {
+          return null;
+        }
+
+        if (isExternal(args.path, externals)) {
+          return {
+            external: true,
             path: args.path,
-            namespace: "cdn-imports"
           };
         }
-      );
 
-      ctx.onResolve(
-        {
-          filter: /.*/,
-          namespace: "cdn-imports"
-        },
-        async (args) => {
-          if (isExternal(args.path, ctx.initialOptions.external || [])) {
-            return {
-              path: args.path,
-              external: true
-            };
-          }
-
-          if (!args.path.startsWith(".")) {
-            return {
-              path: normalizeCdnUrl(resolvedOptions.cdn, args.path),
-              namespace: "cdn-imports"
-            };
-          }
-
-          const url = new URL(args.pluginData.url);
-
-          if (resolvedOptions.cdn === "esm") {
-            url.pathname = join("../", args.path);
-          } else if (
-            resolvedOptions.cdn === "skypack" ||
-            resolvedOptions.cdn === "jsdelivr"
-          ) {
-            url.pathname = join(url.pathname, args.path);
-          } else if (resolvedOptions.cdn === "unpkg") {
-            url.pathname = join(url.pathname, "../", args.path);
-          } else {
-            throw new Error(`Unsupported CDN: ${resolvedOptions.cdn}`);
-          }
-
-          return {
-            path: url.toString(),
-            namespace: "cdn-imports"
-          };
+        if (resolvedOptions.versions[parsed.name]) {
+          parsed.version = resolvedOptions.versions[parsed.name]!;
         }
-      );
 
-      ctx.onResolve(
-        {
-          filter: /.*/
-        },
-        async (args) => {
-          if (args.kind === "entry-point") {
-            return null;
-          }
+        let subpath = parsed.path;
 
-          if (args.path[0] === ".") {
-            throw new Error(`Unexpected relative import: ${args.path}`);
-          }
+        if (!subpath) {
+          const pkg = await ofetch(
+            normalizeCdnUrl(
+              resolvedOptions.cdn,
+                `${parsed.name}@${parsed.version}/package.json`,
+            ),
+            {
+              parseResponse: JSON.parse,
+            },
+          );
 
-          const parsed = parsePackage(args.path);
-
-          if (resolvedOptions.exclude.includes(parsed.name)) {
-            return null;
-          }
-
-          if (isExternal(args.path, ctx.initialOptions.external || [])) {
-            return {
-              external: true,
-              path: args.path
-            };
-          }
-
-          if (resolvedOptions.versions[parsed.name]) {
-            parsed.version = resolvedOptions.versions[parsed.name];
-          }
-
-          let subpath = parsed.path;
-
-          if (!subpath) {
-            const pkg = await ofetch(
-              normalizeCdnUrl(
-                resolvedOptions.cdn,
-                `${parsed.name}@${parsed.version}/package.json`
-              ),
-              {
-                parseResponse: JSON.parse
-              }
-            );
-
-            const resolvedExport =
-              resolve(pkg, ".", {
+          const resolvedExport
+              = resolve(pkg, ".", {
                 require:
-                  args.kind === "require-call" ||
-                  args.kind === "require-resolve"
+                  args.kind === "require-call"
+                  || args.kind === "require-resolve",
               }) || legacy(pkg);
 
-            if (typeof resolvedExport === "string") {
-              subpath = resolvedExport.replace(/^\.?\/?/, "/");
-            } else if (
-              Array.isArray(resolvedExport) &&
-              resolvedExport.length > 0
-            ) {
-              subpath = resolvedExport[0].replace(/^\.?\/?/, "/");
-            }
+          if (typeof resolvedExport === "string") {
+            subpath = resolvedExport.replace(/^\.?\/?/, "/");
+          } else if (Array.isArray(resolvedExport) && resolvedExport.length > 0) {
+            subpath = resolvedExport[0]!.replace(/^\.?\/?/, "/");
           }
-
-          if (subpath && subpath[0] !== "/") {
-            subpath = `/${subpath}`;
-          }
-
-          return {
-            path: normalizeCdnUrl(
-              resolvedOptions.cdn,
-              `${parsed.name}@${parsed.version}${subpath}`
-            ),
-            namespace: "cdn-imports"
-          };
         }
-      );
 
-      ctx.onLoad(
+        if (subpath && subpath[0] !== "/") {
+          subpath = `/${subpath}`;
+        }
+
+        return {
+          path: normalizeCdnUrl(
+            resolvedOptions.cdn,
+              `${parsed.name}@${parsed.version}${subpath}`,
+          ),
+          namespace: "cdn-imports",
+        };
+      });
+
+      build.onLoad(
         {
           filter: /.*/,
-          namespace: "cdn-imports"
+          namespace: "cdn-imports",
         },
         async (args) => {
           const res = await ofetch.native(args.path);
@@ -209,11 +193,11 @@ export function CDNImports(options?: Options): Plugin {
             contents: new Uint8Array(await res.arrayBuffer()),
             loader,
             pluginData: {
-              url: res.url
-            }
+              url: res.url,
+            },
           };
-        }
+        },
       );
-    }
+    },
   };
 }

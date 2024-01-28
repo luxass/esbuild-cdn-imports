@@ -4,7 +4,7 @@ const CHAR_FORWARD_SLASH = 47; /* / */
 function assertPath(path: string): void {
   if (typeof path !== "string") {
     throw new TypeError(
-      `Path must be a string. Received ${JSON.stringify(path)}`
+      `Path must be a string. Received ${JSON.stringify(path)}`,
     );
   }
 }
@@ -65,12 +65,12 @@ export function extname(path: string): string {
   }
 
   if (
-    startDot === -1 ||
-    end === -1 ||
+    startDot === -1
+    || end === -1
     // We saw a non-dot character immediately before the dot
-    preDotState === 0 ||
+    || preDotState === 0
     // The (right-most) trimmed path component is exactly '..'
-    (preDotState === 1 && startDot === end - 1 && startDot === startPart + 1)
+    || (preDotState === 1 && startDot === end - 1 && startDot === startPart + 1)
   ) {
     return "";
   }
@@ -97,10 +97,10 @@ function normalizeString(path: string, allowAboveRoot: boolean): string {
         // NOOP
       } else if (lastSlash !== i - 1 && dots === 2) {
         if (
-          res.length < 2 ||
-          lastSegmentLength !== 2 ||
-          res.charCodeAt(res.length - 1) !== CHAR_DOT ||
-          res.charCodeAt(res.length - 2) !== CHAR_DOT
+          res.length < 2
+          || lastSegmentLength !== 2
+          || res.charCodeAt(res.length - 1) !== CHAR_DOT
+          || res.charCodeAt(res.length - 2) !== CHAR_DOT
         ) {
           if (res.length > 2) {
             const lastSlashIndex = res.lastIndexOf("/");

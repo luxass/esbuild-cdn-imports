@@ -1,13 +1,14 @@
-<h1 align="center">CDN Import Plugin</h1>
+# esbuild-plugin-cdn-imports
 
-This plugin intercepts imports and resolves them to a CDN URL. It is useful for places where the filesystem is not available, such as in the browser.
-<br/>
-<br/>
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+
+✨ Intercepts imports and resolves them to a CDN URL - useful for places where the filesystem is not available, such as in the browser.
 
 ## 📦 Installation
 
 ```sh
-pnpm install -D esbuild esbuild-plugin-cdn-imports
+npm install -D esbuild esbuild-plugin-cdn-imports
 ```
 
 ## 📚 Usage
@@ -39,11 +40,13 @@ await build({
 });
 ```
 
-## 💻 Development
+## 📄 License
 
-- Clone this repository
-- Enable [Corepack](https://github.com/nodejs/corepack) using `corepack enable` (use `npm i -g corepack` for Node.js < 16.10)
-- Install dependencies using `pnpm install`
-- Run tests using `pnpm dev`
+Published under [MIT License](./LICENSE).
 
-Published under [MIT License](./LICENCE).
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/esbuild-plugin-cdn-imports?style=flat&colorA=18181B&colorB=4169E1
+[npm-version-href]: https://npmjs.com/package/esbuild-plugin-cdn-imports
+[npm-downloads-src]: https://img.shields.io/npm/dm/esbuild-plugin-cdn-imports?style=flat&colorA=18181B&colorB=4169E1
+[npm-downloads-href]: https://npmjs.com/package/esbuild-plugin-cdn-imports

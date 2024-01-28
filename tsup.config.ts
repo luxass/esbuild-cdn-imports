@@ -1,9 +1,15 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["./src/index.ts"],
   format: ["cjs", "esm"],
   clean: true,
-  splitting: true,
-  dts: true
+  dts: true,
+  treeshake: true,
+  bundle: true,
+  outExtension(ctx) {
+    return {
+      js: ctx.format === "cjs" ? ".cjs" : ".mjs",
+    };
+  },
 });

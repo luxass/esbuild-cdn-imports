@@ -8,7 +8,7 @@
     "email": "lucasnrgaard@gmail.com",
     "url": "https://luxass.dev"
   },
-  "packageManager": "pnpm@8.15.7",
+  "packageManager": "pnpm@8.15.8",
   "license": "MIT",
   "homepage": "https://github.com/luxass/esbuild-cdn-imports",
   "repository": "https://github.com/luxass/esbuild-cdn-imports",
@@ -64,7 +64,7 @@
   "devDependencies": {
     "@luxass/eslint-config": "^4.2.6",
     "@types/node": "^18.16.19",
-    "esbuild": "^0.20.0",
+    "esbuild": "^0.21.0",
     "eslint": "^9.0.0",
     "eslint-plugin-format": "^0.1.0",
     "tsup": "^8.0.1",

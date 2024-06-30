@@ -62,11 +62,11 @@
     "resolve.exports": "^2.0.2"
   },
   "devDependencies": {
-    "@luxass/eslint-config": "^4.2.6",
+    "@luxass/eslint-config": "^4.7.0",
     "@types/node": "^18.16.19",
     "esbuild": "^0.20.0",
-    "eslint": "^9.0.0",
-    "eslint-plugin-format": "^0.1.0",
+    "eslint": "^9.6.0",
+    "eslint-plugin-format": "^0.1.2",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vitest": "^1.2.2"

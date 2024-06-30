@@ -62,7 +62,7 @@
     "resolve.exports": "^2.0.2"
   },
   "devDependencies": {
-    "@luxass/eslint-config": "^4.2.6",
+    "@luxass/eslint-config": "^4.7.0",
     "@types/node": "^18.16.19",
     "esbuild": "^0.20.0",
     "eslint": "^9.0.0",

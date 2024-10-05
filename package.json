@@ -1,6 +1,6 @@
 {
   "name": "esbuild-plugin-cdn-imports",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A esbuild plugin that resolves imports directly to a CDN.",
   "type": "module",
   "author": {

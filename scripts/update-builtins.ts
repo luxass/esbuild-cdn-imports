@@ -1,8 +1,8 @@
-import process from "node:process";
+import { writeFile } from "node:fs/promises";
 import {
   builtinModules,
 } from "node:module";
-import { writeFile } from "node:fs/promises";
+import process from "node:process";
 
 async function run() {
   const filteredModules = builtinModules.filter((module) => {

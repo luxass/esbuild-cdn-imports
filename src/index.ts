@@ -1,9 +1,9 @@
 import type { SupportedCDNS } from "cdn-resolve";
-import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import type { Loader, OnResolveArgs, Plugin, PluginBuild } from "esbuild";
+import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import { legacy, resolve } from "resolve.exports";
-import { extname, join } from "./path";
 import { builtinModules } from "./builtin-modules";
+import { extname, join } from "./path";
 
 export interface Options {
   /**
@@ -150,7 +150,7 @@ export function CDNImports(options?: Options): Plugin {
         if (!subpath) {
           const pkg = await fetch(normalizeCdnUrl(
             resolvedOptions.cdn,
-              `${parsed.name}@${parsed.version}/package.json`,
+            `${parsed.name}@${parsed.version}/package.json`,
           )).then((res) => res.json());
 
           const resolvedExport
@@ -174,7 +174,7 @@ export function CDNImports(options?: Options): Plugin {
         return {
           path: normalizeCdnUrl(
             resolvedOptions.cdn,
-              `${parsed.name}@${parsed.version}${subpath}`,
+            `${parsed.name}@${parsed.version}${subpath}`,
           ),
           namespace: "cdn-imports",
         };

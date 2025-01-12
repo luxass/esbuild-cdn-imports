@@ -1,8 +1,8 @@
 import type { SupportedCDNS } from "cdn-resolve";
 import type { Loader, OnResolveArgs, Plugin, PluginBuild } from "esbuild";
+import { builtinModules } from "node:module";
 import { normalizeCdnUrl, parsePackage } from "cdn-resolve";
 import { legacy, resolve } from "resolve.exports";
-import { builtinModules } from "./builtin-modules";
 import { extname, join } from "./path";
 
 export interface Options {
@@ -68,7 +68,8 @@ export function CDNImports(options?: Options): Plugin {
     setup(build) {
       const externals = [
         ...(build.initialOptions.external || []),
-        ...builtinModules,
+        ...(builtinModules),
+        ...(builtinModules.map((it) => `node:${it}`)),
       ];
 
       // intercept import paths starting with "http:" and "https:" so

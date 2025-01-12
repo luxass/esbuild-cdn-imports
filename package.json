@@ -58,7 +58,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "esbuild": "^0.17.1 || ^0.18.0 || ^0.19.0 || ^0.21.0"
+    "esbuild": ">=0.19.0"
   },
   "dependencies": {
     "cdn-resolve": "^1.2.0",

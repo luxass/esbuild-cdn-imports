@@ -43,7 +43,7 @@ jobs:
     strategy:
       matrix:
         node: [22, 20, 18]
-        esbuild: [latest, 0.23.0, 0.21.4, 0.19.2, 0.18.0]
+        esbuild: [latest, 0.23.0, 0.21.4, 0.19.2]
         os:
           - ubuntu-latest
           - macos-latest

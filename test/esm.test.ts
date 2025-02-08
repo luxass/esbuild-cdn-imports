@@ -54,7 +54,7 @@ it("resolve @vue/reactivity@3.1.5 from esm.sh", async () => {
   );
 
   expect(result.outputFiles[0].text).toMatch(
-    /^\/\/ cdn-imports:https:\/\/esm.sh\/.*\/@vue\/reactivity@3\.1\.5/gm,
+    /^\/\/ cdn-imports:https:\/\/esm.sh\/@vue\/reactivity@3\.1\.5/gm,
   );
 
   expect(matchedImports).toHaveLength(2);

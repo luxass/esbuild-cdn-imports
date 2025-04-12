@@ -35,6 +35,12 @@ export interface Options {
    * @returns {ReturnType<Parameters<PluginBuild["onResolve"]>[1]>} The result of the `onResolve` callback.
    */
   relativeImportsHandler?: (args: OnResolveArgs, build: PluginBuild) => ReturnType<Parameters<PluginBuild["onResolve"]>[1]>;
+
+  /**
+   * Use jsdelivr ESM for resolving imports.
+   * @default true
+   */
+  useJsdelivrEsm?: boolean;
 }
 
 function resolveOptions(options?: Options) {
@@ -44,6 +50,7 @@ function resolveOptions(options?: Options) {
     versions: options?.versions || {},
     defaultLoader: options?.defaultLoader || "js",
     relativeImportsHandler: options?.relativeImportsHandler,
+    useJsdelivrEsm: options?.useJsdelivrEsm || true,
   };
 }
 
@@ -90,8 +97,14 @@ export function CDNImports(options?: Options): Plugin {
         }
 
         if (!args.path.startsWith(".")) {
+          let path = args.path;
+
+          if (args.path.startsWith("/npm/") && resolvedOptions.cdn === "jsdelivr") {
+            path = args.path.replace(/^\/npm\//, "/");
+          }
+
           return {
-            path: normalizeCdnUrl(resolvedOptions.cdn, args.path),
+            path: normalizeCdnUrl(resolvedOptions.cdn, path),
             namespace: "cdn-imports",
           };
         }
@@ -175,7 +188,7 @@ export function CDNImports(options?: Options): Plugin {
         return {
           path: normalizeCdnUrl(
             resolvedOptions.cdn,
-            `${parsed.name}@${parsed.version}${subpath}`,
+            `${parsed.name}@${parsed.version}${subpath}${(resolvedOptions.useJsdelivrEsm && resolvedOptions.cdn) === "jsdelivr" ? "/+esm" : ""}`,
           ),
           namespace: "cdn-imports",
         };

@@ -311,3 +311,315 @@ function Vt(t2, e = false) {
 var a = Pt(1);
 "
 `;
+
+exports[`jsdelivr: @vue/reactivity > without jsdelivr esm flag > resolve @vue/reactivity 1`] = `
+"// cdn-imports:https://cdn.jsdelivr.net/npm/@vue/shared@3.1.5/+esm
+function t(e, t2) {
+  const o = /* @__PURE__ */ Object.create(null), n = e.split(",");
+  for (let e2 = 0; e2 < n.length; e2++) o[n[e2]] = true;
+  return t2 ? (e2) => !!o[e2.toLowerCase()] : (e2) => !!o[e2];
+}
+var r = t("Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt");
+var i = "itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly";
+var l = t(i);
+var s = t(i + ",async,autofocus,autoplay,controls,default,defer,disabled,hidden,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected");
+var u = t("animation-iteration-count,border-image-outset,border-image-slice,border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,stroke-miterlimit,stroke-opacity,stroke-width");
+var g = t("accept,accept-charset,accesskey,action,align,allow,alt,async,autocapitalize,autocomplete,autofocus,autoplay,background,bgcolor,border,buffered,capture,challenge,charset,checked,cite,class,code,codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,coords,crossorigin,csp,data,datetime,decoding,default,defer,dir,dirname,disabled,download,draggable,dropzone,enctype,enterkeyhint,for,form,formaction,formenctype,formmethod,formnovalidate,formtarget,headers,height,hidden,high,href,hreflang,http-equiv,icon,id,importance,integrity,ismap,itemprop,keytype,kind,label,lang,language,loading,list,loop,low,manifest,max,maxlength,minlength,media,min,multiple,muted,name,novalidate,open,optimum,pattern,ping,placeholder,poster,preload,radiogroup,readonly,referrerpolicy,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,selected,shape,size,sizes,slot,span,spellcheck,src,srcdoc,srclang,srcset,start,step,style,summary,tabindex,target,title,translate,type,usemap,value,width,wrap");
+var x = t("html,body,base,head,link,meta,style,title,address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot");
+var O = t("svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistanceLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,text,textPath,title,tspan,unknown,use,view");
+var S = t("area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr");
+var $ = Object.assign;
+var _ = Object.prototype.hasOwnProperty;
+var q = (e, t2) => _.call(e, t2);
+var G = Array.isArray;
+var V = (e) => "[object Map]" === ee(e);
+var J = (e) => "string" == typeof e;
+var K = (e) => "symbol" == typeof e;
+var X = (e) => null !== e && "object" == typeof e;
+var Q = Object.prototype.toString;
+var ee = (e) => Q.call(e);
+var te = (e) => ee(e).slice(8, -1);
+var ne = (e) => J(e) && "NaN" !== e && "-" !== e[0] && "" + parseInt(e, 10) === e;
+var re = t(",key,ref,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted");
+var ae = (e) => {
+  const t2 = /* @__PURE__ */ Object.create(null);
+  return (o) => t2[o] || (t2[o] = e(o));
+};
+var ie = /-(\\w)/g;
+var le = ae((e) => e.replace(ie, (e2, t2) => t2 ? t2.toUpperCase() : ""));
+var se = /\\B([A-Z])/g;
+var ce = ae((e) => e.replace(se, "-$1").toLowerCase());
+var de = ae((e) => e.charAt(0).toUpperCase() + e.slice(1));
+var fe = ae((e) => e ? \`on\${de(e)}\` : "");
+var pe = (e, t2) => e !== t2 && (e == e || t2 == t2);
+
+// cdn-imports:https://cdn.jsdelivr.net/npm/@vue/reactivity@3.1.5/dist/reactivity.esm-bundler.js/+esm
+var d = /* @__PURE__ */ new WeakMap();
+var g2;
+var p = Symbol("");
+var w = Symbol("");
+var m = true;
+var E = [];
+function S2() {
+  E.push(m), m = false;
+}
+function z() {
+  const t2 = E.pop();
+  m = void 0 === t2 || t2;
+}
+function M(t2, e, n) {
+  if (!m || void 0 === g2) return;
+  let r2 = d.get(t2);
+  r2 || d.set(t2, r2 = /* @__PURE__ */ new Map());
+  let s2 = r2.get(n);
+  s2 || r2.set(n, s2 = /* @__PURE__ */ new Set()), s2.has(g2) || (s2.add(g2), g2.deps.push(s2));
+}
+function O2(t2, e, i2, c, o, u2) {
+  const a2 = d.get(t2);
+  if (!a2) return;
+  const l2 = /* @__PURE__ */ new Set(), f = (t3) => {
+    t3 && t3.forEach((t4) => {
+      (t4 !== g2 || t4.allowRecurse) && l2.add(t4);
+    });
+  };
+  if ("clear" === e) a2.forEach(f);
+  else if ("length" === i2 && G(t2)) a2.forEach((t3, e2) => {
+    ("length" === e2 || e2 >= c) && f(t3);
+  });
+  else switch (void 0 !== i2 && f(a2.get(i2)), e) {
+    case "add":
+      G(t2) ? ne(i2) && f(a2.get("length")) : (f(a2.get(p)), V(t2) && f(a2.get(w)));
+      break;
+    case "delete":
+      G(t2) || (f(a2.get(p)), V(t2) && f(a2.get(w)));
+      break;
+    case "set":
+      V(t2) && f(a2.get(p));
+  }
+  l2.forEach((t3) => {
+    t3.options.scheduler ? t3.options.scheduler(t3) : t3();
+  });
+}
+var P = t("__proto__,__v_isRef,__isVue");
+var W2 = new Set(Object.getOwnPropertyNames(Symbol).map((t2) => Symbol[t2]).filter(K));
+var j = I2();
+var V2 = I2(false, true);
+var A = I2(true);
+var K2 = I2(true, true);
+var N = B();
+function B() {
+  const t2 = {};
+  return ["includes", "indexOf", "lastIndexOf"].forEach((e) => {
+    t2[e] = function(...t3) {
+      const n = xt(this);
+      for (let t4 = 0, e2 = this.length; t4 < e2; t4++) M(n, 0, t4 + "");
+      const r2 = n[e](...t3);
+      return -1 === r2 || false === r2 ? n[e](...t3.map(xt)) : r2;
+    };
+  }), ["push", "pop", "shift", "unshift", "splice"].forEach((e) => {
+    t2[e] = function(...t3) {
+      S2();
+      const n = xt(this)[e].apply(this, t3);
+      return z(), n;
+    };
+  }), t2;
+}
+function I2(e = false, r2 = false) {
+  return function(c, o, u2) {
+    if ("__v_isReactive" === o) return !e;
+    if ("__v_isReadonly" === o) return e;
+    if ("__v_raw" === o && u2 === (e ? r2 ? pt : gt : r2 ? vt : dt).get(c)) return c;
+    const a2 = G(c);
+    if (!e && a2 && q(N, o)) return Reflect.get(N, o, u2);
+    const l2 = Reflect.get(c, o, u2);
+    if (K(o) ? W2.has(o) : P(o)) return l2;
+    if (e || M(c, 0, o), r2) return l2;
+    if (Ot(l2)) {
+      return !a2 || !ne(o) ? l2.value : l2;
+    }
+    return X(l2) ? e ? Rt(l2) : wt(l2) : l2;
+  };
+}
+function q2(t2 = false) {
+  return function(e, r2, i2, c) {
+    let o = e[r2];
+    if (!t2 && (i2 = xt(i2), o = xt(o), !G(e) && Ot(o) && !Ot(i2))) return o.value = i2, true;
+    const u2 = G(e) && ne(r2) ? Number(r2) < e.length : q(e, r2), l2 = Reflect.set(e, r2, i2, c);
+    return e === xt(c) && (u2 ? pe(i2, o) && O2(e, "set", r2, i2) : O2(e, "add", r2, i2)), l2;
+  };
+}
+var C = { get: j, set: q2(), deleteProperty: function(t2, e) {
+  const n = q(t2, e);
+  t2[e];
+  const r2 = Reflect.deleteProperty(t2, e);
+  return r2 && n && O2(t2, "delete", e, void 0), r2;
+}, has: function(e, n) {
+  const r2 = Reflect.has(e, n);
+  return K(n) && W2.has(n) || M(e, 0, n), r2;
+}, ownKeys: function(t2) {
+  return M(t2, 0, G(t2) ? "length" : p), Reflect.ownKeys(t2);
+} };
+var D = { get: A, set: (t2, e) => true, deleteProperty: (t2, e) => true };
+var F2 = $({}, C, { get: V2, set: q2(true) });
+var G2 = $({}, D, { get: K2 });
+var H = (t2) => X(t2) ? wt(t2) : t2;
+var J2 = (t2) => X(t2) ? Rt(t2) : t2;
+var L = (t2) => t2;
+var Q2 = (t2) => Reflect.getPrototypeOf(t2);
+function T(t2, e, n = false, r2 = false) {
+  const s2 = xt(t2 = t2.__v_raw), i2 = xt(e);
+  e !== i2 && !n && M(s2, 0, e), !n && M(s2, 0, i2);
+  const { has: c } = Q2(s2), o = r2 ? L : n ? J2 : H;
+  return c.call(s2, e) ? o(t2.get(e)) : c.call(s2, i2) ? o(t2.get(i2)) : void (t2 !== s2 && t2.get(e));
+}
+function U(t2, e = false) {
+  const n = this.__v_raw, r2 = xt(n), s2 = xt(t2);
+  return t2 !== s2 && !e && M(r2, 0, t2), !e && M(r2, 0, s2), t2 === s2 ? n.has(t2) : n.has(t2) || n.has(s2);
+}
+function X2(t2, e = false) {
+  return t2 = t2.__v_raw, !e && M(xt(t2), 0, p), Reflect.get(t2, "size", t2);
+}
+function Y(t2) {
+  t2 = xt(t2);
+  const e = xt(this);
+  return Q2(e).has.call(e, t2) || (e.add(t2), O2(e, "add", t2, t2)), this;
+}
+function Z(t2, e) {
+  e = xt(e);
+  const n = xt(this), { has: r2, get: s2 } = Q2(n);
+  let i2 = r2.call(n, t2);
+  i2 || (t2 = xt(t2), i2 = r2.call(n, t2));
+  const c = s2.call(n, t2);
+  return n.set(t2, e), i2 ? pe(e, c) && O2(n, "set", t2, e) : O2(n, "add", t2, e), this;
+}
+function $2(t2) {
+  const e = xt(this), { has: n, get: r2 } = Q2(e);
+  let s2 = n.call(e, t2);
+  s2 || (t2 = xt(t2), s2 = n.call(e, t2)), r2 && r2.call(e, t2);
+  const i2 = e.delete(t2);
+  return s2 && O2(e, "delete", t2, void 0), i2;
+}
+function tt() {
+  const t2 = xt(this), e = 0 !== t2.size, n = t2.clear();
+  return e && O2(t2, "clear", void 0, void 0), n;
+}
+function et(t2, e) {
+  return function(n, r2) {
+    const s2 = this, i2 = s2.__v_raw, c = xt(i2), o = e ? L : t2 ? J2 : H;
+    return !t2 && M(c, 0, p), i2.forEach((t3, e2) => n.call(r2, o(t3), o(e2), s2));
+  };
+}
+function nt(t2, e, n) {
+  return function(...s2) {
+    const i2 = this.__v_raw, c = xt(i2), o = V(c), u2 = "entries" === t2 || t2 === Symbol.iterator && o, a2 = "keys" === t2 && o, l2 = i2[t2](...s2), f = n ? L : e ? J2 : H;
+    return !e && M(c, 0, a2 ? w : p), { next() {
+      const { value: t3, done: e2 } = l2.next();
+      return e2 ? { value: t3, done: e2 } : { value: u2 ? [f(t3[0]), f(t3[1])] : f(t3), done: e2 };
+    }, [Symbol.iterator]() {
+      return this;
+    } };
+  };
+}
+function rt(t2) {
+  return function(...e) {
+    return "delete" !== t2 && this;
+  };
+}
+function st() {
+  const t2 = { get(t3) {
+    return T(this, t3);
+  }, get size() {
+    return X2(this);
+  }, has: U, add: Y, set: Z, delete: $2, clear: tt, forEach: et(false, false) }, e = { get(t3) {
+    return T(this, t3, false, true);
+  }, get size() {
+    return X2(this);
+  }, has: U, add: Y, set: Z, delete: $2, clear: tt, forEach: et(false, true) }, n = { get(t3) {
+    return T(this, t3, true);
+  }, get size() {
+    return X2(this, true);
+  }, has(t3) {
+    return U.call(this, t3, true);
+  }, add: rt("add"), set: rt("set"), delete: rt("delete"), clear: rt("clear"), forEach: et(true, false) }, r2 = { get(t3) {
+    return T(this, t3, true, true);
+  }, get size() {
+    return X2(this, true);
+  }, has(t3) {
+    return U.call(this, t3, true);
+  }, add: rt("add"), set: rt("set"), delete: rt("delete"), clear: rt("clear"), forEach: et(true, true) };
+  return ["keys", "values", "entries", Symbol.iterator].forEach((s2) => {
+    t2[s2] = nt(s2, false, false), n[s2] = nt(s2, true, false), e[s2] = nt(s2, false, true), r2[s2] = nt(s2, true, true);
+  }), [t2, n, e, r2];
+}
+var [it, ct, ot, ut] = st();
+function at(t2, e) {
+  const n = e ? t2 ? ut : ot : t2 ? ct : it;
+  return (e2, r2, s2) => "__v_isReactive" === r2 ? !t2 : "__v_isReadonly" === r2 ? t2 : "__v_raw" === r2 ? e2 : Reflect.get(q(n, r2) && r2 in e2 ? n : e2, r2, s2);
+}
+var lt = { get: at(false, false) };
+var ft = { get: at(false, true) };
+var ht = { get: at(true, false) };
+var _t = { get: at(true, true) };
+var dt = /* @__PURE__ */ new WeakMap();
+var vt = /* @__PURE__ */ new WeakMap();
+var gt = /* @__PURE__ */ new WeakMap();
+var pt = /* @__PURE__ */ new WeakMap();
+function wt(t2) {
+  return t2 && t2.__v_isReadonly ? t2 : kt(t2, false, C, lt, dt);
+}
+function Rt(t2) {
+  return kt(t2, true, D, ht, gt);
+}
+function kt(t2, e, n, r2, s2) {
+  if (!X(t2)) return t2;
+  if (t2.__v_raw && (!e || !t2.__v_isReactive)) return t2;
+  const c = s2.get(t2);
+  if (c) return c;
+  const o = (a2 = t2).__v_skip || !Object.isExtensible(a2) ? 0 : function(t3) {
+    switch (t3) {
+      case "Object":
+      case "Array":
+        return 1;
+      case "Map":
+      case "Set":
+      case "WeakMap":
+      case "WeakSet":
+        return 2;
+      default:
+        return 0;
+    }
+  }(te(a2));
+  var a2;
+  if (0 === o) return t2;
+  const l2 = new Proxy(t2, 2 === o ? r2 : n);
+  return s2.set(t2, l2), l2;
+}
+function xt(t2) {
+  return t2 && xt(t2.__v_raw) || t2;
+}
+var Mt = (t2) => X(t2) ? wt(t2) : t2;
+function Ot(t2) {
+  return Boolean(t2 && true === t2.__v_isRef);
+}
+function Pt(t2) {
+  return Vt(t2);
+}
+var jt = class {
+  constructor(t2, e = false) {
+    this._shallow = e, this.__v_isRef = true, this._rawValue = e ? t2 : xt(t2), this._value = e ? t2 : Mt(t2);
+  }
+  get value() {
+    return M(xt(this), 0, "value"), this._value;
+  }
+  set value(t2) {
+    t2 = this._shallow ? t2 : xt(t2), pe(t2, this._rawValue) && (this._rawValue = t2, this._value = this._shallow ? t2 : Mt(t2), O2(xt(this), "set", "value", t2));
+  }
+};
+function Vt(t2, e = false) {
+  return Ot(t2) ? t2 : new jt(t2, e);
+}
+
+// .vitest-testdirs/vitest-vue-reactivity-without-jsdelivr-esm-flag-resolve-vue-reactivity/src/vue-reactivity.ts
+var a = Pt(1);
+"
+`;

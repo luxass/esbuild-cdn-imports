@@ -1,5 +1,6 @@
 import type { BuildOptions } from "esbuild";
 import type { TestdirFromOptions, TestdirOptions } from "vitest-testdirs";
+import type { Options as CDNImportsOptions } from "../src";
 import { join } from "node:path";
 import { build as esbuildBuild } from "esbuild";
 import { expect } from "vitest";
@@ -7,9 +8,12 @@ import { testdir } from "vitest-testdirs";
 import { CDNImports } from "../src";
 
 interface TestSetupOptions {
-  cdn: "esm" | "unpkg" | "jsdelivr" | "skypack";
-  versions?: Record<string, string>;
-  exclude?: string[];
+  cdn: CDNImportsOptions["cdn"];
+  versions?: CDNImportsOptions["versions"];
+  exclude?: CDNImportsOptions["exclude"];
+  useJsdelivrEsm?: CDNImportsOptions["useJsdelivrEsm"];
+  defaultLoader?: CDNImportsOptions["defaultLoader"];
+  relativeImportsHandler?: CDNImportsOptions["relativeImportsHandler"];
   testdirOptions?: TestdirFromOptions & TestdirOptions;
   esbuildOptions?: BuildOptions;
   fileName: string;

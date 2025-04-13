@@ -1,0 +1,7 @@
+{
+  "name": "vue-reactivity-fixture",
+  "private": true,
+  "dependencies": {
+    "@vue/reactivity": "catalog:fixture"
+  }
+}

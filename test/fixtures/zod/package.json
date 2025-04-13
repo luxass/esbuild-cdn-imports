@@ -1,0 +1,7 @@
+{
+  "name": "zod-fixture",
+  "private": true,
+  "dependencies": {
+    "zod": "catalog:fixture"
+  }
+}

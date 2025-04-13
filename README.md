@@ -5,6 +5,9 @@
 
 ✨ Intercepts imports and resolves them to a CDN URL - useful for places where the filesystem is not available, such as in the browser.
 
+> [!NOTE]
+> Be aware that there is some dependencies which doesn't work when imported from a CDN Url.
+
 ## 📦 Installation
 
 ```sh

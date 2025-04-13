@@ -1,0 +1,7 @@
+{
+  "name": "agents-fixture",
+  "private": true,
+  "dependencies": {
+    "agents": "catalog:fixture"
+  }
+}

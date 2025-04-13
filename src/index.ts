@@ -50,7 +50,7 @@ function resolveOptions(options?: Options) {
     versions: options?.versions || {},
     defaultLoader: options?.defaultLoader || "js",
     relativeImportsHandler: options?.relativeImportsHandler,
-    useJsdelivrEsm: options?.useJsdelivrEsm ?? true,
+    useJsdelivrEsm: options?.useJsdelivrEsm,
   };
 }
 

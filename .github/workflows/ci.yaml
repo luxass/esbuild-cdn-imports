@@ -73,3 +73,29 @@ jobs:
 
       - name: test
         run: pnpm test
+
+  release-pr:
+    if: github.repository == 'luxass/esbuild-cdn-imports' && github.event_name != 'push'
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
+        with:
+          node-version: lts/*
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: build
+        run: pnpm build
+
+      - run: pnpm dlx pkg-pr-new publish --compact './'

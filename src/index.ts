@@ -50,7 +50,7 @@ function resolveOptions(options?: Options) {
     versions: options?.versions || {},
     defaultLoader: options?.defaultLoader || "js",
     relativeImportsHandler: options?.relativeImportsHandler,
-    useJsdelivrEsm: options?.useJsdelivrEsm || true,
+    useJsdelivrEsm: options?.useJsdelivrEsm ?? true,
   };
 }
 
@@ -188,7 +188,7 @@ export function CDNImports(options?: Options): Plugin {
         return {
           path: normalizeCdnUrl(
             resolvedOptions.cdn,
-            `${parsed.name}@${parsed.version}${subpath}${(resolvedOptions.useJsdelivrEsm && resolvedOptions.cdn) === "jsdelivr" ? "/+esm" : ""}`,
+            `${parsed.name}@${parsed.version}${subpath}${(resolvedOptions.useJsdelivrEsm && resolvedOptions.cdn === "jsdelivr") ? "/+esm" : ""}`,
           ),
           namespace: "cdn-imports",
         };

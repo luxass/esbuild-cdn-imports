@@ -98,4 +98,4 @@ jobs:
       - name: build
         run: pnpm build
 
-      - run: pnpm pkg-pr-new publish --compact './'
+      - run: pnpm dlx pkg-pr-new publish --compact './'

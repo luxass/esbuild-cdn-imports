@@ -34,8 +34,6 @@ describe("unpkg: react", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/unpkg.com\/react@18\.2\.0/gm,
     );

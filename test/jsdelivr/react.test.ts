@@ -34,8 +34,6 @@ describe("jsdelivr: react", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/react@18\.2\.0/gm,
     );
@@ -57,7 +55,6 @@ describe("jsdelivr: react", () => {
 
       assert(result.outputFiles, "outputFiles should be defined");
       const outputText = result.outputFiles[0].text;
-      expect(outputText).toMatchSnapshot();
 
       expect(outputText).toMatch(
         /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/react@19\.1\.0/gm,

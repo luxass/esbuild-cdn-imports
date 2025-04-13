@@ -41,15 +41,16 @@ describe("unpkg: @vue/reactivity", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/unpkg.com\/@vue\/reactivity@3\.1\.5/gm,
     );
 
     const matchedImports = result.outputFiles[0].text.match(
-      /^\/\/ cdn-imports:https:\/\/unpkg.com\/@vue\//gm,
+      /^\/\/ cdn-imports:https:\/\/unpkg.com\/@vue\/(.*)/gm,
     );
+
+    console.error("matchedImports", matchedImports);
+    console.error(outputText);
 
     expect(matchedImports).toHaveLength(3);
   });

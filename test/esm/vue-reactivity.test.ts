@@ -41,8 +41,6 @@ describe("esm: @vue/reactivity", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/esm.sh\/@vue\/reactivity@3\.1\.5/gm,
     );

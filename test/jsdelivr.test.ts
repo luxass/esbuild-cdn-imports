@@ -40,6 +40,7 @@ it("resolve @vue/reactivity@3.1.5 from jsdelivr", async () => {
         versions: {
           "@vue/reactivity": "3.1.5",
         },
+        useJsdelivrEsm: false,
       }),
     ],
     outfile: "./test/fixtures/out/file.js",

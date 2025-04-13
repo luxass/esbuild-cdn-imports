@@ -1,0 +1,26 @@
+packages:
+  - ./test/fixtures/**/*
+
+catalogs:
+  dev:
+    "@luxass/eslint-config": ^4.18.1
+    "@types/node": ^20.14.9
+    esbuild: ^0.25.2
+    eslint: ^9.24.0
+    eslint-plugin-format: ^1.0.1
+    tsup: ^8.4.0
+    typescript: ^5.8.3
+    vitest: ^3.1.1
+    vitest-testdirs: ^3.0.1
+  fixture:
+    "@types/react": ^19.1.1
+    "@types/react-dom": ^19.1.2
+    "@vue/reactivity": ^3.5.13
+    agents: ^0.0.59
+    react: ^19.1.0
+    react-dom: ^19.1.0
+    vue: ^3.5.13
+    zod: ^3.21.4
+  prod:
+    cdn-resolve: ^2.0.0
+    resolve.exports: ^2.0.3

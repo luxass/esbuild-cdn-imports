@@ -1,0 +1,518 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`jsdelivr: react > resolve react@18.2.0 1`] = `
+"// cdn-imports:https://cdn.jsdelivr.net/npm/react@18.2.0/index.js/+esm
+var e = { exports: {} };
+var t = {};
+var r = Symbol.for("react.element");
+var n = Symbol.for("react.portal");
+var o = Symbol.for("react.fragment");
+var u = Symbol.for("react.strict_mode");
+var s = Symbol.for("react.profiler");
+var a = Symbol.for("react.provider");
+var c = Symbol.for("react.context");
+var i = Symbol.for("react.forward_ref");
+var f = Symbol.for("react.suspense");
+var l = Symbol.for("react.memo");
+var p = Symbol.for("react.lazy");
+var y = Symbol.iterator;
+var d = { isMounted: function() {
+  return false;
+}, enqueueForceUpdate: function() {
+}, enqueueReplaceState: function() {
+}, enqueueSetState: function() {
+} };
+var _ = Object.assign;
+var m = {};
+function x(e4, t4, r3) {
+  this.props = e4, this.context = t4, this.refs = m, this.updater = r3 || d;
+}
+function h() {
+}
+function v(e4, t4, r3) {
+  this.props = e4, this.context = t4, this.refs = m, this.updater = r3 || d;
+}
+x.prototype.isReactComponent = {}, x.prototype.setState = function(e4, t4) {
+  if ("object" != typeof e4 && "function" != typeof e4 && null != e4) throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
+  this.updater.enqueueSetState(this, e4, t4, "setState");
+}, x.prototype.forceUpdate = function(e4) {
+  this.updater.enqueueForceUpdate(this, e4, "forceUpdate");
+}, h.prototype = x.prototype;
+var b = v.prototype = new h();
+b.constructor = v, _(b, x.prototype), b.isPureReactComponent = true;
+var S = Array.isArray;
+var E = Object.prototype.hasOwnProperty;
+var R = { current: null };
+var C = { key: true, ref: true, __self: true, __source: true };
+function w(e4, t4, n4) {
+  var o4, u3 = {}, s4 = null, a4 = null;
+  if (null != t4) for (o4 in void 0 !== t4.ref && (a4 = t4.ref), void 0 !== t4.key && (s4 = "" + t4.key), t4) E.call(t4, o4) && !C.hasOwnProperty(o4) && (u3[o4] = t4[o4]);
+  var c3 = arguments.length - 2;
+  if (1 === c3) u3.children = n4;
+  else if (1 < c3) {
+    for (var i3 = Array(c3), f4 = 0; f4 < c3; f4++) i3[f4] = arguments[f4 + 2];
+    u3.children = i3;
+  }
+  if (e4 && e4.defaultProps) for (o4 in c3 = e4.defaultProps) void 0 === u3[o4] && (u3[o4] = c3[o4]);
+  return { $$typeof: r, type: e4, key: s4, ref: a4, props: u3, _owner: R.current };
+}
+function $(e4) {
+  return "object" == typeof e4 && null !== e4 && e4.$$typeof === r;
+}
+var k = /\\/+/g;
+function g(e4, t4) {
+  return "object" == typeof e4 && null !== e4 && null != e4.key ? function(e5) {
+    var t5 = { "=": "=0", ":": "=2" };
+    return "$" + e5.replace(/[=:]/g, function(e6) {
+      return t5[e6];
+    });
+  }("" + e4.key) : t4.toString(36);
+}
+function O(e4, t4, o4, u3, s4) {
+  var a4 = typeof e4;
+  "undefined" !== a4 && "boolean" !== a4 || (e4 = null);
+  var c3 = false;
+  if (null === e4) c3 = true;
+  else switch (a4) {
+    case "string":
+    case "number":
+      c3 = true;
+      break;
+    case "object":
+      switch (e4.$$typeof) {
+        case r:
+        case n:
+          c3 = true;
+      }
+  }
+  if (c3) return s4 = s4(c3 = e4), e4 = "" === u3 ? "." + g(c3, 0) : u3, S(s4) ? (o4 = "", null != e4 && (o4 = e4.replace(k, "$&/") + "/"), O(s4, t4, o4, "", function(e5) {
+    return e5;
+  })) : null != s4 && ($(s4) && (s4 = function(e5, t5) {
+    return { $$typeof: r, type: e5.type, key: t5, ref: e5.ref, props: e5.props, _owner: e5._owner };
+  }(s4, o4 + (!s4.key || c3 && c3.key === s4.key ? "" : ("" + s4.key).replace(k, "$&/") + "/") + e4)), t4.push(s4)), 1;
+  if (c3 = 0, u3 = "" === u3 ? "." : u3 + ":", S(e4)) for (var i3 = 0; i3 < e4.length; i3++) {
+    var f4 = u3 + g(a4 = e4[i3], i3);
+    c3 += O(a4, t4, o4, f4, s4);
+  }
+  else if (f4 = function(e5) {
+    return null === e5 || "object" != typeof e5 ? null : "function" == typeof (e5 = y && e5[y] || e5["@@iterator"]) ? e5 : null;
+  }(e4), "function" == typeof f4) for (e4 = f4.call(e4), i3 = 0; !(a4 = e4.next()).done; ) c3 += O(a4 = a4.value, t4, o4, f4 = u3 + g(a4, i3++), s4);
+  else if ("object" === a4) throw t4 = String(e4), Error("Objects are not valid as a React child (found: " + ("[object Object]" === t4 ? "object with keys {" + Object.keys(e4).join(", ") + "}" : t4) + "). If you meant to render a collection of children, use an array instead.");
+  return c3;
+}
+function j(e4, t4, r3) {
+  if (null == e4) return e4;
+  var n4 = [], o4 = 0;
+  return O(e4, n4, "", "", function(e5) {
+    return t4.call(r3, e5, o4++);
+  }), n4;
+}
+function I(e4) {
+  if (-1 === e4._status) {
+    var t4 = e4._result;
+    (t4 = t4()).then(function(t5) {
+      0 !== e4._status && -1 !== e4._status || (e4._status = 1, e4._result = t5);
+    }, function(t5) {
+      0 !== e4._status && -1 !== e4._status || (e4._status = 2, e4._result = t5);
+    }), -1 === e4._status && (e4._status = 0, e4._result = t4);
+  }
+  if (1 === e4._status) return e4._result.default;
+  throw e4._result;
+}
+var P = { current: null };
+var T = { transition: null };
+var D = { ReactCurrentDispatcher: P, ReactCurrentBatchConfig: T, ReactCurrentOwner: R };
+t.Children = { map: j, forEach: function(e4, t4, r3) {
+  j(e4, function() {
+    t4.apply(this, arguments);
+  }, r3);
+}, count: function(e4) {
+  var t4 = 0;
+  return j(e4, function() {
+    t4++;
+  }), t4;
+}, toArray: function(e4) {
+  return j(e4, function(e5) {
+    return e5;
+  }) || [];
+}, only: function(e4) {
+  if (!$(e4)) throw Error("React.Children.only expected to receive a single React element child.");
+  return e4;
+} }, t.Component = x, t.Fragment = o, t.Profiler = s, t.PureComponent = v, t.StrictMode = u, t.Suspense = f, t.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = D, t.cloneElement = function(e4, t4, n4) {
+  if (null == e4) throw Error("React.cloneElement(...): The argument must be a React element, but you passed " + e4 + ".");
+  var o4 = _({}, e4.props), u3 = e4.key, s4 = e4.ref, a4 = e4._owner;
+  if (null != t4) {
+    if (void 0 !== t4.ref && (s4 = t4.ref, a4 = R.current), void 0 !== t4.key && (u3 = "" + t4.key), e4.type && e4.type.defaultProps) var c3 = e4.type.defaultProps;
+    for (i3 in t4) E.call(t4, i3) && !C.hasOwnProperty(i3) && (o4[i3] = void 0 === t4[i3] && void 0 !== c3 ? c3[i3] : t4[i3]);
+  }
+  var i3 = arguments.length - 2;
+  if (1 === i3) o4.children = n4;
+  else if (1 < i3) {
+    c3 = Array(i3);
+    for (var f4 = 0; f4 < i3; f4++) c3[f4] = arguments[f4 + 2];
+    o4.children = c3;
+  }
+  return { $$typeof: r, type: e4.type, key: u3, ref: s4, props: o4, _owner: a4 };
+}, t.createContext = function(e4) {
+  return (e4 = { $$typeof: c, _currentValue: e4, _currentValue2: e4, _threadCount: 0, Provider: null, Consumer: null, _defaultValue: null, _globalName: null }).Provider = { $$typeof: a, _context: e4 }, e4.Consumer = e4;
+}, t.createElement = w, t.createFactory = function(e4) {
+  var t4 = w.bind(null, e4);
+  return t4.type = e4, t4;
+}, t.createRef = function() {
+  return { current: null };
+}, t.forwardRef = function(e4) {
+  return { $$typeof: i, render: e4 };
+}, t.isValidElement = $, t.lazy = function(e4) {
+  return { $$typeof: p, _payload: { _status: -1, _result: e4 }, _init: I };
+}, t.memo = function(e4, t4) {
+  return { $$typeof: l, type: e4, compare: void 0 === t4 ? null : t4 };
+}, t.startTransition = function(e4) {
+  var t4 = T.transition;
+  T.transition = {};
+  try {
+    e4();
+  } finally {
+    T.transition = t4;
+  }
+}, t.unstable_act = function() {
+  throw Error("act(...) is not supported in production builds of React.");
+}, t.useCallback = function(e4, t4) {
+  return P.current.useCallback(e4, t4);
+}, t.useContext = function(e4) {
+  return P.current.useContext(e4);
+}, t.useDebugValue = function() {
+}, t.useDeferredValue = function(e4) {
+  return P.current.useDeferredValue(e4);
+}, t.useEffect = function(e4, t4) {
+  return P.current.useEffect(e4, t4);
+}, t.useId = function() {
+  return P.current.useId();
+}, t.useImperativeHandle = function(e4, t4, r3) {
+  return P.current.useImperativeHandle(e4, t4, r3);
+}, t.useInsertionEffect = function(e4, t4) {
+  return P.current.useInsertionEffect(e4, t4);
+}, t.useLayoutEffect = function(e4, t4) {
+  return P.current.useLayoutEffect(e4, t4);
+}, t.useMemo = function(e4, t4) {
+  return P.current.useMemo(e4, t4);
+}, t.useReducer = function(e4, t4, r3) {
+  return P.current.useReducer(e4, t4, r3);
+}, t.useRef = function(e4) {
+  return P.current.useRef(e4);
+}, t.useState = function(e4) {
+  return P.current.useState(e4);
+}, t.useSyncExternalStore = function(e4, t4, r3) {
+  return P.current.useSyncExternalStore(e4, t4, r3);
+}, t.useTransition = function() {
+  return P.current.useTransition();
+}, t.version = "18.2.0", e.exports = t;
+var V = e.exports;
+var L = e.exports.Children;
+var F = e.exports.Component;
+var U = e.exports.Fragment;
+var A = e.exports.Profiler;
+var N = e.exports.PureComponent;
+var M = e.exports.StrictMode;
+var q = e.exports.Suspense;
+var z = e.exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+var B = e.exports.cloneElement;
+var H = e.exports.createContext;
+var W = e.exports.createElement;
+var Y = e.exports.createFactory;
+var G = e.exports.createRef;
+var J = e.exports.forwardRef;
+var K = e.exports.isValidElement;
+var Q = e.exports.lazy;
+var X = e.exports.memo;
+var Z = e.exports.startTransition;
+var ee = e.exports.unstable_act;
+var te = e.exports.useCallback;
+var re = e.exports.useContext;
+var ne = e.exports.useDebugValue;
+var oe = e.exports.useDeferredValue;
+var ue = e.exports.useEffect;
+var se = e.exports.useId;
+var ae = e.exports.useImperativeHandle;
+var ce = e.exports.useInsertionEffect;
+var ie = e.exports.useLayoutEffect;
+var fe = e.exports.useMemo;
+var le = e.exports.useReducer;
+var pe = e.exports.useRef;
+var ye = e.exports.useState;
+var de = e.exports.useSyncExternalStore;
+var _e = e.exports.useTransition;
+var me = e.exports.version;
+
+// cdn-imports:https://cdn.jsdelivr.net/npm/react@18.2.0/+esm
+var e2 = { exports: {} };
+var t2 = {};
+var r2 = Symbol.for("react.element");
+var n2 = Symbol.for("react.portal");
+var o2 = Symbol.for("react.fragment");
+var u2 = Symbol.for("react.strict_mode");
+var s2 = Symbol.for("react.profiler");
+var a2 = Symbol.for("react.provider");
+var c2 = Symbol.for("react.context");
+var i2 = Symbol.for("react.forward_ref");
+var f2 = Symbol.for("react.suspense");
+var l2 = Symbol.for("react.memo");
+var p2 = Symbol.for("react.lazy");
+var y2 = Symbol.iterator;
+var d2 = { isMounted: function() {
+  return false;
+}, enqueueForceUpdate: function() {
+}, enqueueReplaceState: function() {
+}, enqueueSetState: function() {
+} };
+var _2 = Object.assign;
+var m2 = {};
+function x2(e4, t4, r3) {
+  this.props = e4, this.context = t4, this.refs = m2, this.updater = r3 || d2;
+}
+function h2() {
+}
+function v2(e4, t4, r3) {
+  this.props = e4, this.context = t4, this.refs = m2, this.updater = r3 || d2;
+}
+x2.prototype.isReactComponent = {}, x2.prototype.setState = function(e4, t4) {
+  if ("object" != typeof e4 && "function" != typeof e4 && null != e4) throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
+  this.updater.enqueueSetState(this, e4, t4, "setState");
+}, x2.prototype.forceUpdate = function(e4) {
+  this.updater.enqueueForceUpdate(this, e4, "forceUpdate");
+}, h2.prototype = x2.prototype;
+var b2 = v2.prototype = new h2();
+b2.constructor = v2, _2(b2, x2.prototype), b2.isPureReactComponent = true;
+var S2 = Array.isArray;
+var E2 = Object.prototype.hasOwnProperty;
+var R2 = { current: null };
+var C2 = { key: true, ref: true, __self: true, __source: true };
+function w2(e4, t4, n4) {
+  var o4, u3 = {}, s4 = null, a4 = null;
+  if (null != t4) for (o4 in void 0 !== t4.ref && (a4 = t4.ref), void 0 !== t4.key && (s4 = "" + t4.key), t4) E2.call(t4, o4) && !C2.hasOwnProperty(o4) && (u3[o4] = t4[o4]);
+  var c3 = arguments.length - 2;
+  if (1 === c3) u3.children = n4;
+  else if (1 < c3) {
+    for (var i3 = Array(c3), f4 = 0; f4 < c3; f4++) i3[f4] = arguments[f4 + 2];
+    u3.children = i3;
+  }
+  if (e4 && e4.defaultProps) for (o4 in c3 = e4.defaultProps) void 0 === u3[o4] && (u3[o4] = c3[o4]);
+  return { $$typeof: r2, type: e4, key: s4, ref: a4, props: u3, _owner: R2.current };
+}
+function $2(e4) {
+  return "object" == typeof e4 && null !== e4 && e4.$$typeof === r2;
+}
+var k2 = /\\/+/g;
+function g2(e4, t4) {
+  return "object" == typeof e4 && null !== e4 && null != e4.key ? function(e5) {
+    var t5 = { "=": "=0", ":": "=2" };
+    return "$" + e5.replace(/[=:]/g, function(e6) {
+      return t5[e6];
+    });
+  }("" + e4.key) : t4.toString(36);
+}
+function O2(e4, t4, o4, u3, s4) {
+  var a4 = typeof e4;
+  "undefined" !== a4 && "boolean" !== a4 || (e4 = null);
+  var c3 = false;
+  if (null === e4) c3 = true;
+  else switch (a4) {
+    case "string":
+    case "number":
+      c3 = true;
+      break;
+    case "object":
+      switch (e4.$$typeof) {
+        case r2:
+        case n2:
+          c3 = true;
+      }
+  }
+  if (c3) return s4 = s4(c3 = e4), e4 = "" === u3 ? "." + g2(c3, 0) : u3, S2(s4) ? (o4 = "", null != e4 && (o4 = e4.replace(k2, "$&/") + "/"), O2(s4, t4, o4, "", function(e5) {
+    return e5;
+  })) : null != s4 && ($2(s4) && (s4 = function(e5, t5) {
+    return { $$typeof: r2, type: e5.type, key: t5, ref: e5.ref, props: e5.props, _owner: e5._owner };
+  }(s4, o4 + (!s4.key || c3 && c3.key === s4.key ? "" : ("" + s4.key).replace(k2, "$&/") + "/") + e4)), t4.push(s4)), 1;
+  if (c3 = 0, u3 = "" === u3 ? "." : u3 + ":", S2(e4)) for (var i3 = 0; i3 < e4.length; i3++) {
+    var f4 = u3 + g2(a4 = e4[i3], i3);
+    c3 += O2(a4, t4, o4, f4, s4);
+  }
+  else if (f4 = function(e5) {
+    return null === e5 || "object" != typeof e5 ? null : "function" == typeof (e5 = y2 && e5[y2] || e5["@@iterator"]) ? e5 : null;
+  }(e4), "function" == typeof f4) for (e4 = f4.call(e4), i3 = 0; !(a4 = e4.next()).done; ) c3 += O2(a4 = a4.value, t4, o4, f4 = u3 + g2(a4, i3++), s4);
+  else if ("object" === a4) throw t4 = String(e4), Error("Objects are not valid as a React child (found: " + ("[object Object]" === t4 ? "object with keys {" + Object.keys(e4).join(", ") + "}" : t4) + "). If you meant to render a collection of children, use an array instead.");
+  return c3;
+}
+function j2(e4, t4, r3) {
+  if (null == e4) return e4;
+  var n4 = [], o4 = 0;
+  return O2(e4, n4, "", "", function(e5) {
+    return t4.call(r3, e5, o4++);
+  }), n4;
+}
+function I2(e4) {
+  if (-1 === e4._status) {
+    var t4 = e4._result;
+    (t4 = t4()).then(function(t5) {
+      0 !== e4._status && -1 !== e4._status || (e4._status = 1, e4._result = t5);
+    }, function(t5) {
+      0 !== e4._status && -1 !== e4._status || (e4._status = 2, e4._result = t5);
+    }), -1 === e4._status && (e4._status = 0, e4._result = t4);
+  }
+  if (1 === e4._status) return e4._result.default;
+  throw e4._result;
+}
+var P2 = { current: null };
+var T2 = { transition: null };
+var D2 = { ReactCurrentDispatcher: P2, ReactCurrentBatchConfig: T2, ReactCurrentOwner: R2 };
+t2.Children = { map: j2, forEach: function(e4, t4, r3) {
+  j2(e4, function() {
+    t4.apply(this, arguments);
+  }, r3);
+}, count: function(e4) {
+  var t4 = 0;
+  return j2(e4, function() {
+    t4++;
+  }), t4;
+}, toArray: function(e4) {
+  return j2(e4, function(e5) {
+    return e5;
+  }) || [];
+}, only: function(e4) {
+  if (!$2(e4)) throw Error("React.Children.only expected to receive a single React element child.");
+  return e4;
+} }, t2.Component = x2, t2.Fragment = o2, t2.Profiler = s2, t2.PureComponent = v2, t2.StrictMode = u2, t2.Suspense = f2, t2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = D2, t2.cloneElement = function(e4, t4, n4) {
+  if (null == e4) throw Error("React.cloneElement(...): The argument must be a React element, but you passed " + e4 + ".");
+  var o4 = _2({}, e4.props), u3 = e4.key, s4 = e4.ref, a4 = e4._owner;
+  if (null != t4) {
+    if (void 0 !== t4.ref && (s4 = t4.ref, a4 = R2.current), void 0 !== t4.key && (u3 = "" + t4.key), e4.type && e4.type.defaultProps) var c3 = e4.type.defaultProps;
+    for (i3 in t4) E2.call(t4, i3) && !C2.hasOwnProperty(i3) && (o4[i3] = void 0 === t4[i3] && void 0 !== c3 ? c3[i3] : t4[i3]);
+  }
+  var i3 = arguments.length - 2;
+  if (1 === i3) o4.children = n4;
+  else if (1 < i3) {
+    c3 = Array(i3);
+    for (var f4 = 0; f4 < i3; f4++) c3[f4] = arguments[f4 + 2];
+    o4.children = c3;
+  }
+  return { $$typeof: r2, type: e4.type, key: u3, ref: s4, props: o4, _owner: a4 };
+}, t2.createContext = function(e4) {
+  return (e4 = { $$typeof: c2, _currentValue: e4, _currentValue2: e4, _threadCount: 0, Provider: null, Consumer: null, _defaultValue: null, _globalName: null }).Provider = { $$typeof: a2, _context: e4 }, e4.Consumer = e4;
+}, t2.createElement = w2, t2.createFactory = function(e4) {
+  var t4 = w2.bind(null, e4);
+  return t4.type = e4, t4;
+}, t2.createRef = function() {
+  return { current: null };
+}, t2.forwardRef = function(e4) {
+  return { $$typeof: i2, render: e4 };
+}, t2.isValidElement = $2, t2.lazy = function(e4) {
+  return { $$typeof: p2, _payload: { _status: -1, _result: e4 }, _init: I2 };
+}, t2.memo = function(e4, t4) {
+  return { $$typeof: l2, type: e4, compare: void 0 === t4 ? null : t4 };
+}, t2.startTransition = function(e4) {
+  var t4 = T2.transition;
+  T2.transition = {};
+  try {
+    e4();
+  } finally {
+    T2.transition = t4;
+  }
+}, t2.unstable_act = function() {
+  throw Error("act(...) is not supported in production builds of React.");
+}, t2.useCallback = function(e4, t4) {
+  return P2.current.useCallback(e4, t4);
+}, t2.useContext = function(e4) {
+  return P2.current.useContext(e4);
+}, t2.useDebugValue = function() {
+}, t2.useDeferredValue = function(e4) {
+  return P2.current.useDeferredValue(e4);
+}, t2.useEffect = function(e4, t4) {
+  return P2.current.useEffect(e4, t4);
+}, t2.useId = function() {
+  return P2.current.useId();
+}, t2.useImperativeHandle = function(e4, t4, r3) {
+  return P2.current.useImperativeHandle(e4, t4, r3);
+}, t2.useInsertionEffect = function(e4, t4) {
+  return P2.current.useInsertionEffect(e4, t4);
+}, t2.useLayoutEffect = function(e4, t4) {
+  return P2.current.useLayoutEffect(e4, t4);
+}, t2.useMemo = function(e4, t4) {
+  return P2.current.useMemo(e4, t4);
+}, t2.useReducer = function(e4, t4, r3) {
+  return P2.current.useReducer(e4, t4, r3);
+}, t2.useRef = function(e4) {
+  return P2.current.useRef(e4);
+}, t2.useState = function(e4) {
+  return P2.current.useState(e4);
+}, t2.useSyncExternalStore = function(e4, t4, r3) {
+  return P2.current.useSyncExternalStore(e4, t4, r3);
+}, t2.useTransition = function() {
+  return P2.current.useTransition();
+}, t2.version = "18.2.0", e2.exports = t2;
+var V2 = e2.exports;
+var L2 = e2.exports.Children;
+var F2 = e2.exports.Component;
+var U2 = e2.exports.Fragment;
+var A2 = e2.exports.Profiler;
+var N2 = e2.exports.PureComponent;
+var M2 = e2.exports.StrictMode;
+var q2 = e2.exports.Suspense;
+var z2 = e2.exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+var B2 = e2.exports.cloneElement;
+var H2 = e2.exports.createContext;
+var W2 = e2.exports.createElement;
+var Y2 = e2.exports.createFactory;
+var G2 = e2.exports.createRef;
+var J2 = e2.exports.forwardRef;
+var K2 = e2.exports.isValidElement;
+var Q2 = e2.exports.lazy;
+var X2 = e2.exports.memo;
+var Z2 = e2.exports.startTransition;
+var ee2 = e2.exports.unstable_act;
+var te2 = e2.exports.useCallback;
+var re2 = e2.exports.useContext;
+var ne2 = e2.exports.useDebugValue;
+var oe2 = e2.exports.useDeferredValue;
+var ue2 = e2.exports.useEffect;
+var se2 = e2.exports.useId;
+var ae2 = e2.exports.useImperativeHandle;
+var ce2 = e2.exports.useInsertionEffect;
+var ie2 = e2.exports.useLayoutEffect;
+var fe2 = e2.exports.useMemo;
+var le2 = e2.exports.useReducer;
+var pe2 = e2.exports.useRef;
+var ye2 = e2.exports.useState;
+var de2 = e2.exports.useSyncExternalStore;
+var _e2 = e2.exports.useTransition;
+var me2 = e2.exports.version;
+
+// cdn-imports:https://cdn.jsdelivr.net/npm/react@18.2.0/jsx-runtime/+esm
+var e3 = { exports: {} };
+var o3 = {};
+var t3 = V2;
+var s3 = Symbol.for("react.element");
+var p3 = Symbol.for("react.fragment");
+var n3 = Object.prototype.hasOwnProperty;
+var a3 = t3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner;
+var f3 = { key: true, ref: true, __self: true, __source: true };
+function _3(r3, e4, o4) {
+  var t4, p4 = {}, _4 = null, l4 = null;
+  for (t4 in void 0 !== o4 && (_4 = "" + o4), void 0 !== e4.key && (_4 = "" + e4.key), void 0 !== e4.ref && (l4 = e4.ref), e4) n3.call(e4, t4) && !f3.hasOwnProperty(t4) && (p4[t4] = e4[t4]);
+  if (r3 && r3.defaultProps) for (t4 in e4 = r3.defaultProps) void 0 === p4[t4] && (p4[t4] = e4[t4]);
+  return { $$typeof: s3, type: r3, key: _4, ref: l4, props: p4, _owner: a3.current };
+}
+o3.Fragment = p3, o3.jsx = _3, o3.jsxs = _3, e3.exports = o3;
+var l3 = e3.exports;
+var x3 = e3.exports.Fragment;
+var y3 = e3.exports.jsx;
+var m3 = e3.exports.jsxs;
+
+// .vitest-testdirs/vitest-react-jsdelivr-react-resolve-react-18-2-0/src/react.tsx
+function Page() {
+  const [count, setCount] = ye(0);
+  return /* @__PURE__ */ y3("div", {});
+}
+export {
+  Page
+};
+"
+`;

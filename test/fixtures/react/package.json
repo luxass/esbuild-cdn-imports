@@ -1,0 +1,12 @@
+{
+  "name": "react-fixture",
+  "private": true,
+  "dependencies": {
+    "react": "catalog:fixture",
+    "react-dom": "catalog:fixture"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:fixture",
+    "@types/react-dom": "catalog:fixture"
+  }
+}

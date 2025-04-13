@@ -78,6 +78,7 @@ jobs:
     if: github.repository == 'luxass/esbuild-cdn-imports' && github.event_name != 'push'
     needs:
       - build
+      - test
     runs-on: ubuntu-latest
     timeout-minutes: 20
 

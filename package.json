@@ -58,7 +58,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "esbuild": ">=0.19.0"
+    "esbuild": ">=0.20.0"
   },
   "dependencies": {
     "cdn-resolve": "catalog:prod",

@@ -30,9 +30,6 @@ describe("jsdelivr: agents", () => {
           write: false,
           external: [
             "cloudflare:workers",
-            "partyserver",
-            "cron-schedule",
-            "nanoid",
           ],
         },
       },

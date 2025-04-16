@@ -228,9 +228,12 @@ export function CDNImports(options?: Options): Plugin {
                 resolvedOptions.cdn,
                 `${parsed.name}@${parsed.version}${parsed.path || ""}`,
               );
+
               const packageResponse = await fetch(packageUrl, { method: "HEAD" });
+
               if (packageResponse.ok) {
                 debugLog("Package with subpath resolved, using:", packageUrl);
+
                 return {
                   path: packageUrl,
                   namespace: "cdn-imports",
@@ -248,7 +251,10 @@ export function CDNImports(options?: Options): Plugin {
             try {
               const url = normalizePath(resolvedOptions.cdn, path);
               const response = await fetch(url, { method: "HEAD" });
-              if (response.ok) {
+
+              debugLog("Direct URL check:", { url, redirected: response.redirected });
+
+              if (response.ok && !response.redirected) {
                 debugLog("URL exists, using directly:", url);
                 return {
                   path: url,
@@ -564,8 +570,8 @@ export function CDNImports(options?: Options): Plugin {
             args.path += "/+esm";
           }
 
-          // strip slashes that are next to each other and convert backslashes to forward slashes
-          const normalizedPath = args.path.replace(/\\+/g, "/").replace(/\/{2,}/g, "/");
+          // normalize path but preserve protocol double slashes (e.g., https://)
+          const normalizedPath = args.path.replace(/(?<!:)\/{2,}/g, "/").replace(/\\+/g, "/");
 
           debugLog("Load Normalized path:", { original: args.path, normalized: normalizedPath });
           const res = await fetch(normalizedPath);

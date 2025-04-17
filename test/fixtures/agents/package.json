@@ -2,6 +2,8 @@
   "name": "agents-fixture",
   "private": true,
   "dependencies": {
-    "agents": "catalog:fixture"
+    "agents": "catalog:fixture",
+    "zod": "catalog:fixture",
+    "@modelcontextprotocol/sdk": "catalog:fixture"
   }
 }

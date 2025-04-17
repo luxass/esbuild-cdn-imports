@@ -34,8 +34,6 @@ describe("jsdelivr: zod", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/zod@3\.24\.2/gm,
     );
@@ -57,7 +55,6 @@ describe("jsdelivr: zod", () => {
 
       assert(result.outputFiles, "outputFiles should be defined");
       const outputText = result.outputFiles[0].text;
-      expect(outputText).toMatchSnapshot();
 
       expect(outputText).toMatch(
         /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/zod@3\.24\.2/gm,

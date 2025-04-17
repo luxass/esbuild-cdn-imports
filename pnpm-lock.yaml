@@ -34,6 +34,9 @@ catalogs:
       specifier: ^3.0.1
       version: 3.0.1
   fixture:
+    '@modelcontextprotocol/sdk':
+      specifier: ^1.9.0
+      version: 1.9.0
     '@types/react':
       specifier: ^19.1.1
       version: 19.1.1
@@ -107,9 +110,15 @@ importers:
 
   test/fixtures/agents:
     dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: catalog:fixture
+        version: 1.9.0
       agents:
         specifier: catalog:fixture
         version: 0.0.59(@cloudflare/workers-types@4.20250413.0)
+      zod:
+        specifier: catalog:fixture
+        version: 3.24.2
 
   test/fixtures/react:
     dependencies:

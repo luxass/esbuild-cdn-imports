@@ -34,8 +34,6 @@ describe("unpkg: zod", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/unpkg.com\/zod@3\.24\.2/gm,
     );

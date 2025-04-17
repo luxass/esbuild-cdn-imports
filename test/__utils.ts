@@ -17,12 +17,13 @@ interface TestSetupOptions {
   testdirOptions?: TestdirFromOptions & TestdirOptions;
   esbuildOptions?: BuildOptions;
   fileName: string;
+  allowWarnings?: boolean;
 }
 export async function buildWithCDN(
   fixturePath: string,
   options: TestSetupOptions,
 ) {
-  const testdirPath = await testdir.from(fixturePath);
+  const testdirPath = await testdir.from(fixturePath, options.testdirOptions);
 
   if (options.cdn == null || !options.cdn) {
     throw new Error("cdn option is required");
@@ -38,9 +39,13 @@ export async function buildWithCDN(
         cdn: options.cdn,
         versions: options.versions,
         exclude: options.exclude,
+        defaultLoader: options.defaultLoader,
+        useJsdelivrEsm: options.useJsdelivrEsm,
+        relativeImportsHandler: options.relativeImportsHandler,
+        debug: true,
       }),
     ],
-    outfile: join(testdirPath, "out.js"),
+    outfile: join(testdirPath, "dist/out.js"),
   };
 
   const result = await esbuildBuild({
@@ -48,10 +53,11 @@ export async function buildWithCDN(
     ...options.esbuildOptions,
   });
 
-  expect({
-    errors: result.errors,
-    warnings: result.warnings,
-  }).toEqual({ errors: [], warnings: [] });
+  if (!options.allowWarnings) {
+    expect(result.warnings).toEqual([]);
+  }
+
+  expect(result.errors).toEqual([]);
 
   return {
     testdirPath,

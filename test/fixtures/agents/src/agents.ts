@@ -1,13 +1,20 @@
 import { McpAgent } from "agents/mcp";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { z } from "zod";
 
+export class MyMCP extends McpAgent {
+  server = new McpServer({
+    name: "Demo",
+    version: "1.0.0",
+  });
 
-export class MyCustomMCP extends McpAgent {
-  // @ts-ignore
-  server = null;
-
-  init(): Promise<void> {
-    throw new Error("Method not implemented.");
+  async init() {
+    this.server.tool("add", {
+      a: z.number(), b: z.number()
+    }, async ({ a, b }) => ({
+      content: [{ type: "text", text: String(a + b) }],
+    }));
   }
 }
 
-export default MyCustomMCP.mount("/mcp", { binding: "MyMCP" });
+export default MyMCP.mount("/mcp");

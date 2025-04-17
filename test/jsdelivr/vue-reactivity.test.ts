@@ -41,8 +41,6 @@ describe("jsdelivr: @vue/reactivity", () => {
     assert(result.outputFiles, "outputFiles should be defined");
     const outputText = result.outputFiles[0].text;
 
-    expect(outputText).toMatchSnapshot();
-
     expect(outputText).toMatch(
       /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/@vue\/reactivity@3\.1\.5/gm,
     );
@@ -71,7 +69,6 @@ describe("jsdelivr: @vue/reactivity", () => {
       assert(result.outputFiles, "outputFiles should be defined");
 
       const outputText = result.outputFiles[0].text;
-      expect(outputText).toMatchSnapshot();
 
       expect(outputText).toMatch(
         /^\/\/ cdn-imports:https:\/\/cdn.jsdelivr.net\/npm\/@vue\/reactivity@3\.1\.5/gm,

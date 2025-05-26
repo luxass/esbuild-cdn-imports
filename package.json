@@ -8,7 +8,7 @@
     "email": "lucasnrgaard@gmail.com",
     "url": "https://luxass.dev"
   },
-  "packageManager": "pnpm@10.8.1",
+  "packageManager": "pnpm@10.11.0",
   "license": "MIT",
   "homepage": "https://github.com/luxass/esbuild-cdn-imports",
   "repository": {

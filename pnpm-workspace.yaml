@@ -14,8 +14,8 @@ catalogs:
     vitest-testdirs: ^4.0.0
   fixture:
     "@modelcontextprotocol/sdk": ^1.9.0
-    "@types/react": ^19.1.1
-    "@types/react-dom": ^19.1.2
+    "@types/react": 19.1.1
+    "@types/react-dom": 19.1.2
     "@vue/reactivity": ^3.5.13
     agents: ^0.0.95
     react: ^19.1.0

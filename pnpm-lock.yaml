@@ -38,10 +38,10 @@ catalogs:
       specifier: ^1.9.0
       version: 1.9.0
     '@types/react':
-      specifier: ^19.1.1
+      specifier: 19.1.1
       version: 19.1.1
     '@types/react-dom':
-      specifier: ^19.1.2
+      specifier: 19.1.2
       version: 19.1.2
     '@vue/reactivity':
       specifier: ^3.5.13
@@ -2193,6 +2193,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   spdx-exceptions@2.5.0:
     resolution: {integrity: sha512-PiU42r+xO4UbUS1buo3LPJkjlO7430Xn5SVAhdpzzsPHsjbYVflnnFdATgabnLude+Cqu25p6N+g2lw/PFsa4w==}

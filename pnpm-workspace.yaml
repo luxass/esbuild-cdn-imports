@@ -21,7 +21,7 @@ catalogs:
     react: ^19.1.0
     react-dom: ^19.1.0
     vue: ^3.5.13
-    zod: ^3.21.4
+    zod: ^4.0.0
   prod:
     cdn-resolve: ^2.0.0
     resolve.exports: ^2.0.3

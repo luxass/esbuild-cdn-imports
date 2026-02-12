@@ -59,8 +59,8 @@ catalogs:
       specifier: ^3.5.13
       version: 3.5.13
     zod:
-      specifier: ^3.21.4
-      version: 3.24.2
+      specifier: ^4.0.0
+      version: 4.3.6
   prod:
     cdn-resolve:
       specifier: ^2.0.0
@@ -118,7 +118,7 @@ importers:
         version: 0.0.95(@cloudflare/workers-types@4.20250413.0)(react@19.1.0)
       zod:
         specifier: catalog:fixture
-        version: 3.24.2
+        version: 4.3.6
 
   test/fixtures/react:
     dependencies:
@@ -152,7 +152,7 @@ importers:
     dependencies:
       zod:
         specifier: catalog:fixture
-        version: 3.24.2
+        version: 4.3.6
 
 packages:
 
@@ -1486,6 +1486,7 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globals@14.0.0:
@@ -2193,6 +2194,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   spdx-exceptions@2.5.0:
     resolution: {integrity: sha512-PiU42r+xO4UbUS1buo3LPJkjlO7430Xn5SVAhdpzzsPHsjbYVflnnFdATgabnLude+Cqu25p6N+g2lw/PFsa4w==}
@@ -2560,11 +2562,11 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
-
   zod@3.25.28:
     resolution: {integrity: sha512-/nt/67WYKnr5by3YS7LroZJbtcCBurDKKPBPWWzaxvVCGuG/NOsiKkrjoOhI8mJ+SQUXEbUzeB3S+6XDUEEj7Q==}
+
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -5195,8 +5197,8 @@ snapshots:
     dependencies:
       zod: 3.25.28
 
-  zod@3.24.2: {}
-
   zod@3.25.28: {}
+
+  zod@4.3.6: {}
 
   zwitch@2.0.4: {}

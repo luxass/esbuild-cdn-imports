@@ -3,7 +3,7 @@ packages:
 
 catalogs:
   dev:
-    "@luxass/eslint-config": ^4.18.1
+    "@luxass/eslint-config": ^7.0.0
     "@types/node": ^22.0.0
     esbuild: ^0.25.2
     eslint: ^9.24.0

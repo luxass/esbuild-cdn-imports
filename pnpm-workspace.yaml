@@ -10,7 +10,7 @@ catalogs:
     eslint-plugin-format: ^1.0.1
     tsup: ^8.4.0
     typescript: ^5.8.3
-    vitest: ^3.1.1
+    vitest: ^4.0.0
     vitest-testdirs: ^4.0.0
   fixture:
     "@modelcontextprotocol/sdk": ^1.9.0
